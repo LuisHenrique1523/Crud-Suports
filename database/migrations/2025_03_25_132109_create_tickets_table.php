@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\TicketStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,6 +16,8 @@ return new class extends Migration
             $table->id();
             $table->string('subject');
             $table->string('description');
+            $table->string('priority');
+            $table->enum('status',array_column(TicketStatus::cases(),'name'));
             $table->timestamps();
         });
     }

@@ -1,44 +1,51 @@
 <div>
-    {{-- <div class="">
-        <table class="w-full text-sm text-left rtl:text-right text-blue-100 dark:text-blue-100">
-            <thead class="text-xs text-white uppercase bg-blue-600 dark:text-white">
+    <div class="">
+        <table class="table">
+            <thead>
                 <tr>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col">
                         Usuário
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                        Cor
+                    <th scope="col">
+                        Email
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col">
                         Categoria
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col">
                         Assunto
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col">
                         Descrição
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col">
                         Prioridade
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col">
                         Status
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col">
                         Ação
                     </th>
                 </tr>
             </thead>
             <tbody>
-
+                @foreach ($tickets as $ticket)
+                <tr>
+                    
+                    <td>{{$ticket->user->name}}</td>
+                    <td>{{$ticket->user->email}}</td>
+                    <td>{{$ticket->category->category}}</td>
+                    <td>{{$ticket->subject}}</td>
+                    <td>{{$ticket->description}}</td>
+                    <td>{{$ticket->priority}}</td>
+                    <td>{{getStatusTicket($ticket->status) }}</td>
+                    <td><button type="button" class="btn btn-info">Visualizar</button></td>
+                </tr>
+                @endforeach
             </tbody>         
         </table>
-    </div>--}}
+    </div>
     
-        @foreach ($categories as $category)
-
-            <h1>{{$category->category}}</h1><br>
-            <h1>{{$category->color}}</h1>
         
-        @endforeach
 </div>

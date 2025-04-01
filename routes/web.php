@@ -1,11 +1,14 @@
 <?php
 
+use App\Enums\TicketStatus;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\{
     HomePage,
     TicketsPage,
     UsersPage,
-    CategoriesPage
+    CategoriesPage,
+    PrioritiesPage,
+    StatusesPage
 };
 
 // Route::get('/users', [UserController::class, 'index'])->name('users.index');
@@ -17,10 +20,16 @@ use App\Livewire\{
 // Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 // Route::resource('/users', UserController::class);
 
+Route::get('/test', function(){
+    dd(array_column(TicketStatus::cases(),'name'));
+});
+
 Route::get('/', HomePage::class);
 Route::get('/tickets',TicketsPage::class);
 Route::get('/users/{user}',UsersPage::class);
 Route::get('/categories',CategoriesPage::class);
+Route::get('/priorities',PrioritiesPage::class);
+Route::get('/status',StatusesPage::class);
 
 Route::middleware([
     'auth:sanctum',

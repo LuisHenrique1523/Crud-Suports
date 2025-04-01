@@ -2,38 +2,44 @@
 
 namespace App\Livewire;
 
-use App\Models\Category\Category;
 use Livewire\Component;
+use App\Models\Category\Category;
 use App\Models\Ticket\Ticket;
-use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
 
 class TicketsPage extends Component
 {
-    public $tickets;
     public $subject;
     public $description;
     public $categories;
-    public $users;
+    public $category_id;
+    public $tickets;
+    public $priority;
+    public $status;
+
     protected $rules = [
         'subject' => 'required',
         'description' => 'required',
-        'category' => 'required'
+        'priority' => 'required',
+        'category_id' => 'required'
     ];
     public function submit(Request $request)
     {
         $ticket = new Ticket;
-        // $user = auth()->user()
-        // $ticket -> user_id = $user->id;
-        $ticket-> subject = $this -> subject;
-        $ticket-> description = $this -> description;
-        $ticket-> category_id = $this -> categories;
+        $ticket->user_id = auth()->id();
+        $ticket->subject = $this -> subject;
+        $ticket->description = $this->description;
+        $ticket->priority = $this->priority;
+        $ticket->status = $this->status;
+        $ticket->category_id = $this->category_id;
         $ticket-> save();
+
+        return redirect()->to('/');
     }
     public function mount()
     {
-        // $this ->user = Auth::class;
-        $this -> categories = Category::all();
+        $this->categories = Category::all();
+        $this->tickets = Ticket::all();
     }
     public function render()
     {

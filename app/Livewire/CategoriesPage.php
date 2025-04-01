@@ -7,6 +7,8 @@ use App\Models\Category\Category;
 
 class CategoriesPage extends Component
 {
+    public $category;
+    public  $color;
     public $categories;
     protected $rules = [
         'category' => 'required',
@@ -14,10 +16,14 @@ class CategoriesPage extends Component
     ];
     public function submit()
     {
-        $validateData = $this->validate();
-        Category::create($validateData);
+        $category = new Category;
+        $category ->category = $this ->category;
+        $category ->color = $this ->color;
+        $category ->save();
+        
+        return redirect()->to('/');
     }
-    public function mount()
+    public function mount(Category $category)
     {
         $this -> categories = Category::all();
     }

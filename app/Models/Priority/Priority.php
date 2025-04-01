@@ -6,5 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Priority extends Model
 {
-    //
+    protected $table = 'priority';
+    protected $fillable = ['priority','color'];
+
+    public function tickets()
+    {
+        return $this->hasMany(Priority::class);
+    }
 }
