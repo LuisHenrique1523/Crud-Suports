@@ -14,17 +14,18 @@
         <div>
             <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Categoria</label>
             <select id="category" wire:model="category_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option selected>Selecione uma categoria</option>    
                 @foreach ($categories as $category)
-                    <option>{{$category->id}}</option>
+                <option >{{$category->id}}</option>
                 @endforeach
             </select>
         </div>
         <br>
         <div class="text-lg">
             <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Priority</label> <br>
-            <input type="radio" wire:model="priority" id="small-input" name="priority" value="3"> High <br>
-            <input type="radio" wire:model="priority" id="small-input" name="priority" value="2"> Medium <br>
-            <input type="radio" wire:model="priority" id="small-input" name="priority" value="1"> Low <br>
+            <input type="radio" wire:model="priority" id="small-input" name="High" value="3"> High <br>
+            <input type="radio" wire:model="priority" id="small-input" name="Medium" value="2"> Medium <br>
+            <input type="radio" wire:model="priority" id="small-input" name="Low" value="1"> Low <br>
         </div>
         <button type="submit" class="btn btn-primary">Cadastrar</button>
     </form>

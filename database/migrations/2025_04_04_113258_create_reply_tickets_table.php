@@ -11,10 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('tickets', function (Blueprint $table) {
+        Schema::create('replies_ticket', function (Blueprint $table) {
+            $table->id();
+            $table->text('content');
+            $table->timestamps();
+
             $table->foreignId('user_id')
-            ->constrained()
-            ->onUpdate('cascade');
+                ->references('id')
+                ->on('users');
+
+            $table->foreignId('ticket_id')
+                ->references('id')
+                ->on('tickets');
         });
     }
 
@@ -23,10 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('tickets', function (Blueprint $table) {
-            $table->foreignId('user_id')
-            ->constrained()
-            ->onUpdate('cascade');
-        });
+        Schema::dropIfExists('replies_tickets');
     }
 };

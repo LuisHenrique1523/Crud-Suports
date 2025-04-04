@@ -8,14 +8,16 @@ enum TicketStatus: string
     case F = 'Finalizado';
 
     
-    public static function formValue(string $name): string
+    public static function formValue(string $name)
     {
-        foreach (self::cases() as $status) {
+        foreach (TicketStatus::cases() as $status) {
             if ($name === $status->name) {
                 return $status->value;
             }
-        }
+            else{
+                throw new \ValueError("$name inválido");
+            }
 
-        throw new \ValueError("$status inválido");
+        }
     }
 }

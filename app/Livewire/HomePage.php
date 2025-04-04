@@ -4,24 +4,24 @@ namespace App\Livewire;
 
 use App\Models\Category\Category;
 use App\Models\Ticket\Ticket;
-use App\Models\User;
-use Livewire\Component;
+use Livewire\{Component,WithPagination};
+
+use function Laravel\Prompts\select;
 
 class HomePage extends Component
 {
-    public $user;
+    use WithPagination;
     public $categories;
     public $tickets;
-    // public function mount(User $user){
-    //     $this->user = $user;
-    // }
+    public $listeners = ['TicketDeleted' => '$refresh'];
     public function mount()
     {
-        $this -> categories = Category::all();
-        $this -> tickets = Ticket::all();
+        $this->categories = Category::all();
+        $this->tickets = Ticket::all();
     }
-    public function render()
+    public function render(Ticket $ticket)
     {
-        return view('livewire.home-page');
+        $tickets = $ticket->orderByDesc('priority')->paginate(10);
+        return view('livewire.home-page', compact('tickets'));
     }
 }

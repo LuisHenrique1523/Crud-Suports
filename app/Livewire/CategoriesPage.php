@@ -10,19 +10,11 @@ class CategoriesPage extends Component
     public $category;
     public  $color;
     public $categories;
+    public $listeners = ['CategoryDeleted' => '$refresh'];
     protected $rules = [
         'category' => 'required',
         'color' => 'required'
     ];
-    public function submit()
-    {
-        $category = new Category;
-        $category ->category = $this ->category;
-        $category ->color = $this ->color;
-        $category ->save();
-        
-        return redirect()->to('/');
-    }
     public function mount(Category $category)
     {
         $this -> categories = Category::all();

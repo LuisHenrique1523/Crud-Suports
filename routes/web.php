@@ -4,32 +4,29 @@ use App\Enums\TicketStatus;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\{
     HomePage,
+    CategoriesPage,
+    CategoriesCreate,
+    CategoriesEdit,
     TicketsPage,
     UsersPage,
-    CategoriesPage,
     PrioritiesPage,
-    StatusesPage
+    StatusesPage,
+    ShowPage,
 };
-
-// Route::get('/users', [UserController::class, 'index'])->name('users.index');
-// Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
-// Route::post('/users', [UserController::class, 'store'])->name('users.store');
-// Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
-// Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-// Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
-// Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
-// Route::resource('/users', UserController::class);
 
 Route::get('/test', function(){
     dd(array_column(TicketStatus::cases(),'name'));
 });
 
-Route::get('/', HomePage::class);
+Route::get('/', HomePage::class)->name('home');
+Route::get('/categories',CategoriesPage::class)->name('category');
+Route::get('/categories.edit/{id}',CategoriesEdit::class)->name('category_show');
+Route::get('/categories.create',CategoriesCreate::class)->name('category_create');
 Route::get('/tickets',TicketsPage::class);
 Route::get('/users/{user}',UsersPage::class);
-Route::get('/categories',CategoriesPage::class);
 Route::get('/priorities',PrioritiesPage::class);
 Route::get('/status',StatusesPage::class);
+Route::get('/show/{id}',ShowPage::class)->name('show');
 
 Route::middleware([
     'auth:sanctum',

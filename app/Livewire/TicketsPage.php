@@ -30,7 +30,7 @@ class TicketsPage extends Component
         $ticket->subject = $this -> subject;
         $ticket->description = $this->description;
         $ticket->priority = $this->priority;
-        $ticket->status = $this->status;
+        $ticket->status = 'A';
         $ticket->category_id = $this->category_id;
         $ticket-> save();
 
