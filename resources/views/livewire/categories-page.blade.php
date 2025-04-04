@@ -14,7 +14,7 @@
                     <td style="background: {{$category->color}}">{{$category->id}}</td>
                     <td style="background: {{$category->color}}">{{$category->category}}</td>
                     <td style="background: {{$category->color}}">
-                        <a href="{{ route('category_show', ['id'=>$category->id]) }}" wire:wire:navigate>
+                        <a href="{{ route('category_show', ['id'=>$category->id]) }}" wire:click:categoryEdit{{ $category->id }}>
                             <button type="button" class="btn btn-info">Editar</button>
                         </a>
                     </td>

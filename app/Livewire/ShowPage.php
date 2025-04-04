@@ -12,13 +12,6 @@ class ShowPage extends Component
     protected $id;
     protected $categories;
     protected $tickets;
-    // public function editticket($id)
-    // {
-    //     $ticket = Ticket::find($id);
-
-    //     $this->id = $ticket->id;
-    //     $this->user = $ticket->user
-    // }
     public function mount($id)
     {
         $tickets = Ticket::where('id',$id)->first();
@@ -27,7 +20,7 @@ class ShowPage extends Component
     }
         public function render(Ticket $ticket)
     {
-        $tickets = $ticket->orderByDesc('priority')->paginate(10);
+        $tickets = $ticket->orderBy('priority')->paginate(10);
         return view('livewire.show-page',compact('tickets'));
     }
 }
