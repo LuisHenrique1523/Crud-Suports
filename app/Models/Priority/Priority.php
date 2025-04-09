@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Priority extends Model
 {
     protected $table = 'priority';
-    protected $fillable = ['priority','color'];
+    protected $fillable = ['priority'];
 
     public function tickets()
     {

@@ -26,6 +26,7 @@ class DeleteCategory extends Component
         session()-> flash('success', 'Ticket removido com sucesso!');
         
         $this->dispatch('TicketDeleted');
+        $this ->dispatch('refresh-me');
     }
     public function render()
     {

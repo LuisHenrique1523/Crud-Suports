@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('replies_ticket', function (Blueprint $table) {
-            $table->id();
-            $table->text('content');
+            $table->uuid('id',36)->primary();
+            $table->text('reply');
             $table->timestamps();
 
             $table->foreignId('user_id')

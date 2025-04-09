@@ -7,10 +7,11 @@ use App\Models\Category\Category;
 
 class CategoriesPage extends Component
 {
-    public $category;
-    public  $color;
     public $categories;
-    public $listeners = ['CategoryDeleted' => '$refresh'];
+    public $listeners = [
+        'CategoryDeleted' => '$refresh',
+        'refresh-me' => '$refresh',
+    ];
     protected $rules = [
         'category' => 'required',
         'color' => 'required'

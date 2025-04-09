@@ -13,9 +13,9 @@ class CategoriesCreate extends Component
     public function submit()
     {
         $category = new Category;
-        $category ->category = $this ->category;
-        $category ->color = $this ->color;
-        $category ->save();
+        $category->category = $this->category;
+        $category->color = $this->color;
+        $category->save();
         
         return redirect()->to('/categories');
     }

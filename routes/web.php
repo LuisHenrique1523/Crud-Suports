@@ -10,6 +10,7 @@ use App\Livewire\{
     TicketsPage,
     UsersPage,
     PrioritiesPage,
+    Replies,
     StatusesPage,
     ShowPage,
 };
@@ -19,7 +20,7 @@ Route::get('/test', function(){
 });
 
 Route::get('/', HomePage::class)->name('home');
-Route::get('/categories',CategoriesPage::class)->name('category');
+Route::get('/categories',CategoriesPage::class);
 Route::get('/categories.edit/{id}',CategoriesEdit::class)->name('category_show');
 Route::get('/categories.create',CategoriesCreate::class)->name('category_create');
 Route::get('/tickets',TicketsPage::class);
@@ -27,6 +28,7 @@ Route::get('/users/{user}',UsersPage::class);
 Route::get('/priorities',PrioritiesPage::class);
 Route::get('/status',StatusesPage::class);
 Route::get('/show/{id}',ShowPage::class)->name('show');
+Route::get('/replies',Replies::class);
 
 Route::middleware([
     'auth:sanctum',
@@ -37,5 +39,3 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
-
-

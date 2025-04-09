@@ -1,6 +1,6 @@
 <div>
-    <div style="text-align: center">
-        <table class="table">
+    <div style="text-align:center; table-layout:auto; width:250%; border:1px solid; margin-bottom:0px;">
+        <table style="margin-bottom:0px;" class="table">
             <thead>
                 <tr>
                     <th style="background-color: black; color: aliceblue;" scope="col">Id</th>
@@ -27,7 +27,7 @@
                         <td>{{$ticket->priority}}</td>
                         <td>{{getStatusTicket($ticket->status) }}</td>
                         <td>
-                            <a href="{{ route('show', ['id' => $ticket->id]) }}">
+                            <a href="{{ route('show', $ticket->id) }}">
                                 <button type="button" class="btn btn-info">Visualizar</button>
                             </a>
                         </td>

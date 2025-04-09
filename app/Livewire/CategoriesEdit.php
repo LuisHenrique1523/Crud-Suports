@@ -7,29 +7,34 @@ use Livewire\Component;
 
 class CategoriesEdit extends Component
 {
-    public $categories;
     public $id;
     public $category;
     public  $color;
     public function mount(Category $id)
     {
-        $this->category = $id;
+        $this->id = $id->id;
         $this->category = $id->category;
         $this->color = $id->color;
+    }
+    public function categoryEdit($validated)
+    {
+        $validated = $this->validate([
+            'id' => 'required',
+            'category' => 'required',
+            'color' => 'required',
+        
+        ]);
+        // dd($validated);
+        $this->category->update($validated);
+        
+        return $this->redirect('/categories');
+    }
+    public function closeModal()
+    {
+        $this->resetInput();
     }
     public function render()
     {
         return view('livewire.categories-edit');
-    }
-    public function categoryEdit($id)
-    {
-        $validated = $this->validate([
-            'category' => 'required',
-            'color' => 'required',
-        ]);
-    
-        $this->category->update($validated);
-
-        return $this->redirect('/categories');
     }
 }
