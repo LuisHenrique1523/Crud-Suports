@@ -15,7 +15,6 @@ class TicketsPage extends Component
     public $category_id;
     public $tickets;
     public $priority;
-
     protected $rules = [
         'subject' => 'required',
         'description' => 'required',

@@ -19,7 +19,7 @@ Route::get('/test', function(){
     dd(array_column(TicketStatus::cases(),'name'));
 });
 
-Route::get('/', HomePage::class)->name('home');
+Route::get('/home', HomePage::class)->name('home');
 Route::get('/categories',CategoriesPage::class);
 Route::get('/categories.edit/{id}',CategoriesEdit::class)->name('category_show');
 Route::get('/categories.create',CategoriesCreate::class)->name('category_create');
@@ -30,6 +30,10 @@ Route::get('/status',StatusesPage::class);
 Route::get('/show/{id}',ShowPage::class)->name('show');
 Route::get('/replies',Replies::class);
 
+Route::get('/',function () 
+{
+    return view('auth.login');
+} );
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

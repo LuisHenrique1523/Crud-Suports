@@ -7,7 +7,7 @@
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
                         {{-- logo inicial, fazer menu de interação --}}
-                        <x-application-mark class="block h-9 w-auto" />
+                        <img src="{{ asset('images/Support.png') }}" class="size-20" viewbox="0 0 50 50" fill="none" class="block h-9 w-auto" />
                     </a>
                 </div>
 
@@ -176,7 +176,7 @@
                 <form method="POST" action="{{ route('logout') }}" x-data>
                     @csrf
 
-                    <x-responsive-nav-link href="{{ route('logout') }}"
+                    <x-responsive-nav-link href="{{ route('login') }}"
                                    @click.prevent="$root.submit();">
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>

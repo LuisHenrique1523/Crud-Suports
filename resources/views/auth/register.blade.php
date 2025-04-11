@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
-            <x-authentication-card-logo />
+            <img src="{{ asset('images/Support.png') }}" class="size-20" viewbox="0 0 50 50" fill="none">
         </x-slot>
 
         <x-validation-errors class="mb-4" />
@@ -27,6 +27,11 @@
             <div class="mt-4">
                 <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
                 <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+            </div>
+
+            <div>
+                <x-label for="isAdmin" value="{{ __('Admin flag') }}" />
+                <x-input id="isAdmin" class="block mt-1 w-full" type="text" name="isAdmin" />
             </div>
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())

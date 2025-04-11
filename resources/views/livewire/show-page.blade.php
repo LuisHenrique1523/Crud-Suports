@@ -1,6 +1,13 @@
 <div>
     <div class="card offset-9 col-12">
-        <h5 class="card-header">Visualizar Ticket</h5>
+        <div>
+            <h5 class="card-header">Visualizar Ticket
+                @if (!Auth()->user()->isAdmin==1)
+                    <button class="btn btn-info">Editar</button>
+                    <button class="btn btn-danger">Deletar</button>
+                @endif
+            </h5>
+        </div>
         <div class="card-body">
             <h5 class="card title">ID : {{ $getRecord->id }}</h5>
             <h5 class="card title">Nome : {{ $getRecord->user->name }}</h5>
@@ -12,12 +19,21 @@
             <h5 class="card title">Status : {{ getStatusTicket($getRecord->status) }}</h5>
         </div>
     </div>
-    <div style="position: relative;
-                top: 2px;
-                left: 305px;">
-        <button class="btn btn-success" data-toggle="modal" data-target="replies">Responder Ticket</button>
-        <button class="btn btn-primary">Editar</button>
-    </div>
     <br>
-    <livewire:replies :replyRecord="$getRecord->id" />
+    @if (Auth()->user()->isAdmin==1)
+        <livewire:replies :replyRecord="$getRecord->id" />
+    
+    @else
+        {{-- <div class="card offset-9 col-12">
+        <h5 class="card-header">Resposta ao Ticket</h5>
+            <div class="card-body">
+                    <h5 class="card title">Responsável : {{ $reply->user_id }}</h5>
+                    <h5 class="card title">Resposta : {{ $reply->reply }}</h5>
+             
+                    Nenhuma resposta!
+                
+            </div>
+        </div> --}}
+    @endif
+    <br>
 </div>
