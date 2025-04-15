@@ -27,9 +27,8 @@ class CategoriesEdit extends Component
             'color' => 'required',
         ]);
         
-        $category = Category::update([
-            'category' => $validated
-        ]);
+        $this->category->update($validated);
+        
         return redirect()->to('/categories');
     }
     public function closeModal()
