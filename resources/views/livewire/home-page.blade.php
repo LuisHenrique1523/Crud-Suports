@@ -1,5 +1,5 @@
 <div>
-    <div style="text-align:center; table-layout:auto; width:250%; border:1px solid; margin-bottom:0px;">
+    <div style="text-align:center; table-layout:auto; width:260%; border:1px solid; margin-bottom:0px;">
         <table style="margin-bottom:0px;" class="table">
             <thead>
                 <tr>
@@ -11,7 +11,7 @@
                     <th style="background-color: black; color: aliceblue;" scope="col">Descrição</th>
                     <th style="background-color: black; color: aliceblue;" scope="col">Prioridade</th>
                     <th style="background-color: black; color: aliceblue;" scope="col">Status</th>
-                    <th style="background-color: black; color: aliceblue;" scope="col">Ação</th>
+                    <th style="background-color: black; color: aliceblue;" colspan="2">Ação</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,7 +22,7 @@
                         <th scope="row">{{$ticket->id}}</th>
                         <td>{{$ticket->user->name}}</td>
                         <td>{{$ticket->user->email}}</td>
-                        <td>{{$ticket->category->category}}</td>
+                        <td>{{$ticket->category->name}}</td>
                         <td>{{$ticket->subject}}</td>
                         <td>{{$ticket->description}}</td>
                         <td>{{$ticket->priority}}</td>
@@ -32,9 +32,12 @@
                                 <button type="button" class="btn btn-info">Visualizar</button>
                             </a>
                         </td>
-                        {{-- <td>
-                            <livewire:delete-ticket :id="$ticket->id">
-                        </td> --}}
+                        <td>
+                            <a href="{{ route('show', $ticket->id) }}">
+                                <button type="button" class="btn btn-success">Finalizar</button>
+                            </a>
+                        </td>
+                        {{-- <livewire:delete-ticket :id="$ticket->id"> --}}
                     </tr>
                 @endforeach
                 @else

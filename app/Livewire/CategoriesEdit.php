@@ -3,31 +3,34 @@
 namespace App\Livewire;
 
 use App\Models\Category\Category;
+use Illuminate\Http\Client\Request;
 use Livewire\Component;
 
 class CategoriesEdit extends Component
 {
+    public $validated;
     public $id;
-    public $category;
+    public $name;
     public  $color;
-    public function mount(Category $id)
+    public Category $category;
+    public function mount(Category $category)
     {
-        $this->id = $id->id;
-        $this->category = $id->category;
-        $this->color = $id->color;
+        $this->id = $category->id;
+        $this->name = $category->name;
+        $this->color = $category->color;
     }
-    public function categoryEdit($validated)
+    public function categoryEdit()
     {
         $validated = $this->validate([
             'id' => 'required',
-            'category' => 'required',
+            'name' => 'required',
             'color' => 'required',
-        
         ]);
-        // dd($validated);
-        $this->category->update($validated);
         
-        return $this->redirect('/categories');
+        $category = Category::update([
+            'category' => $validated
+        ]);
+        return redirect()->to('/categories');
     }
     public function closeModal()
     {

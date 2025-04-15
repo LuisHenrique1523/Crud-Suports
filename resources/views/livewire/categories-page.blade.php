@@ -12,9 +12,9 @@
                 @foreach ($categories as $category)
                 <tr style="text-align: center;">
                     <td style="background: {{$category->color}}; border: none;">{{$category->id}}</td>
-                    <td style="background: {{$category->color}}; border: none;">{{$category->category}}</td>
+                    <td style="background: {{$category->color}}; border: none;">{{$category->name}}</td>
                     <td style="background: {{$category->color}}; border: none;">
-                        <a href="{{ route('category_show', ['id'=>$category->id]) }}">
+                        <a href="{{ route('category_show', ['category'=>$category->id]) }}">
                         <button type="button" class="btn btn-info">Editar</button>
                         </a>
                     </td>

@@ -16,7 +16,7 @@
             <select id="category" wire:model="category_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option selected>Selecione uma categoria</option>    
                 @foreach ($categories as $category)
-                <option value="{{$category->id}}" >{{$category->category}}</option>
+                <option value="{{$category->id}}" >{{$category->name}}</option>
                 @endforeach
             </select>
         </div>
@@ -27,6 +27,6 @@
             <input type="radio" wire:model="priority" id="small-input" name="Medium" value="2"> Média <br>
             <input type="radio" wire:model="priority" id="small-input" name="Low" value="1"> Baixa <br>
         </div>
-        <button type="submit" class="btn btn-primary">Cadastrar</button>
+        <button href="{{ route('home')}}"type="submit" class="btn btn-primary">Cadastrar</button>
     </form>
 </div>

@@ -13,7 +13,7 @@ class CategoriesPage extends Component
         'refresh-me' => '$refresh',
     ];
     protected $rules = [
-        'category' => 'required',
+        'name' => 'required',
         'color' => 'required'
     ];
     public function mount(Category $category)

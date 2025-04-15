@@ -21,7 +21,7 @@ Route::get('/test', function(){
 
 Route::get('/home', HomePage::class)->name('home');
 Route::get('/categories',CategoriesPage::class);
-Route::get('/categories.edit/{id}',CategoriesEdit::class)->name('category_show');
+Route::get('/categories.edit/{category}',CategoriesEdit::class)->name('category_show');
 Route::get('/categories.create',CategoriesCreate::class)->name('category_create');
 Route::get('/tickets',TicketsPage::class);
 Route::get('/users/{user}',UsersPage::class);

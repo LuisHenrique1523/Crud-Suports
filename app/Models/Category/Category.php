@@ -8,7 +8,7 @@ use PHPUnit\Framework\Attributes\Ticket;
 class Category extends Model
 {
     protected $table = 'categories';
-    protected $fillable = ['category','color'];
+    protected $fillable = ['name','color'];
 
     public function tickets()
     {

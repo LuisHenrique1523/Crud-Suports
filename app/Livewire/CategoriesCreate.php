@@ -8,12 +8,12 @@ use Livewire\Component;
 class CategoriesCreate extends Component
 {
     public $categories;
-    public $category;
+    public $name;
     public $color;
     public function submit()
     {
         $category = new Category;
-        $category->category = $this->category;
+        $category->name = $this->name;
         $category->color = $this->color;
         $category->save();
         

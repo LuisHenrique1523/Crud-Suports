@@ -32,7 +32,7 @@ class TicketsPage extends Component
         $ticket->category_id = $this->category_id;
         $ticket-> save();
 
-        return redirect()->to('/');
+        return redirect()->to('home');
     }
     public function mount()
     {
