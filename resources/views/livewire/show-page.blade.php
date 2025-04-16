@@ -1,10 +1,13 @@
 <div>
     <div class="card offset-9 col-12">
         <div>
-            <h5 class="card-header">Visualizar Ticket
+            <h5 style="background-color: black; color: aliceblue;" class="card-header">Visualizar Ticket
+                
+                <a href="{{ route('ticket_edit', ['ticket'=>$getRecord->id]) }}">
+                    <button type="button" class="btn btn-info">Editar</button>
+                </a>
                 @if (!Auth()->user()->isAdmin==1)
-                    <button class="btn btn-info">Editar</button>
-                    <button class="btn btn-danger">Deletar</button>
+                    <livewire:delete-ticket :id="$getRecord->id">
                 @endif
             </h5>
         </div>
@@ -16,7 +19,7 @@
             <h5 class="card title">Assunto : {{ $getRecord->subject }}</h5>
             <h5 class="card title">Descrição : {{ $getRecord->description }}</h5>
             <h5 class="card title">Prioridade : {{ $getRecord->priority }}</h5>
-            <h5 class="card title">Status : {{ getStatusTicket($getRecord->status) }}</h5>
+            <h5 class="card title">Status : {{ ($getRecord->status) }}</h5>
         </div>
     </div>
     <br>

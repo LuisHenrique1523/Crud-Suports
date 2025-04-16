@@ -15,12 +15,26 @@ class HomePage extends Component
     public function mount()
     {
         $this->categories = Category::all();
-        $this->tickets = Ticket::all();   
     }
-    public function render(Ticket $ticket)
+    public function update($ticketId)
+    {
+        $ticket = Ticket::find($ticketId);
+
+        if($ticket){
+            if($ticket->status){
+                $ticket->status = 0;
+            }
+            else{
+                $ticket->status = 1;
+            }
+            $ticket->save();
+        }
+        return back();
+    }
+    public function render(Ticket $tickets)
     {
         $supports = auth()->user()->tickets;
-        $tickets = $ticket->orderByDesc('priority')->paginate(1);
-        return view('livewire.home-page',compact('tickets','supports'));
+        $tick = $tickets->orderByDesc('priority')->paginate(10);
+        return view('livewire.home-page',compact('tick','supports'));
     }
 }

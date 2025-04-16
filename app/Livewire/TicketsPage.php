@@ -28,12 +28,13 @@ class TicketsPage extends Component
         $ticket->subject = $this -> subject;
         $ticket->description = $this->description;
         $ticket->priority = $this->priority;
-        $ticket->status = 'A';
+        $ticket->status;
         $ticket->category_id = $this->category_id;
         $ticket-> save();
 
         return redirect()->to('home');
     }
+    
     public function mount()
     {
         $this->categories = Category::all();

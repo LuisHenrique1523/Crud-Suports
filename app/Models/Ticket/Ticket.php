@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ticket extends Model
 {
     protected $table = 'tickets';
-    protected $fillable = ['subject','description','priority'];
+    protected $fillable = ['subject','description','priority','status'];
 
     public function replies()
     {

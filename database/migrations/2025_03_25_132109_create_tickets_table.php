@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('subject');
             $table->string('description');
             $table->string('priority');
-            $table->enum('status',array_column(TicketStatus::cases(),'name'));
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }

@@ -18,12 +18,12 @@ class DeleteTicket extends Component
     {
         $this->ticket->delete();
 
-        session()-> flash('success', 'Ticket removido com sucesso!');
+        // session()-> flash('success', 'Ticket removido com sucesso!');
 
         $this->dispatch('TicketDeleted');
 
-        session()-> flash('error', 'Ticket não encontrado!');
-        return;
+        // session()-> flash('error', 'Ticket não encontrado!');
+        return redirect('/home');
     }
 
     public function render()

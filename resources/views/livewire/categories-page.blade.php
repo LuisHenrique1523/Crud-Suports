@@ -1,4 +1,11 @@
 <div>
+    <div class="col-12">
+        @if (session()->has('success'))
+            <div class="alert alert-success">
+                {{ ('Categoria deletada com sucesso!' )}}
+            </div>
+        @endif
+    </div>
     <div style="table-layout: auto; width: 100%; border: 1px solid;" >
         <table style="margin-bottom: 0px;" class="table">
             <thead>
@@ -9,6 +16,7 @@
                 </tr>
             </thead>
             <tbody>
+                @if ($categories->count() > 0)
                 @foreach ($categories as $category)
                 <tr style="text-align: center;">
                     <td style="background: {{$category->color}}; border: none;">{{$category->id}}</td>
@@ -23,6 +31,11 @@
                     </td>
                 </tr>
                 @endforeach
+                @else
+                    <tr>
+                        <td colspan="9">Nenhum Ticket Registrado</td>
+                    </tr>
+                @endif
             </tbody>
         </table>
     </div>

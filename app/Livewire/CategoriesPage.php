@@ -10,7 +10,7 @@ class CategoriesPage extends Component
     public $categories;
     public $listeners = [
         'CategoryDeleted' => '$refresh',
-        'refresh-me' => '$refresh',
+        'refresh' => '$refresh',
     ];
     protected $rules = [
         'name' => 'required',

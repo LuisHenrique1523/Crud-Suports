@@ -5,6 +5,8 @@ namespace App\Livewire;
 use App\Models\Category\Category;
 use Livewire\Component;
 
+use function Laravel\Prompts\error;
+
 class DeleteCategory extends Component
 {
     public $category;
@@ -16,17 +18,15 @@ class DeleteCategory extends Component
 
     public function DeleteCategory()
     {
-        if(!$this->category) {
-            session()-> flash('error', 'Ticket não encontrado!');
-            return;
-        }
-
         $this->category->delete();
-
         session()-> flash('success', 'Ticket removido com sucesso!');
-        
+
+        if(!$this->category->delete()){
+            session()->flash('error','Não é posspivel deletar uma categoria em uso');
+            return redirect('/categories');
+        }
         $this->dispatch('TicketDeleted');
-        $this ->dispatch('refresh-me');
+        $this ->dispatch('refresh');
     }
     public function render()
     {

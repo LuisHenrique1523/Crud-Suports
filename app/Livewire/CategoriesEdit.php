@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class CategoriesEdit extends Component
 {
-    public $validated;
+    // public $validated;
     public $id;
     public $name;
     public  $color;
@@ -30,10 +30,6 @@ class CategoriesEdit extends Component
         $this->category->update($validated);
         
         return redirect()->to('/categories');
-    }
-    public function closeModal()
-    {
-        $this->resetInput();
     }
     public function render()
     {

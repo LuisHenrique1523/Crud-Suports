@@ -13,17 +13,16 @@ use App\Livewire\{
     Replies,
     StatusesPage,
     ShowPage,
+    TicketEdit,
 };
-
-Route::get('/test', function(){
-    dd(array_column(TicketStatus::cases(),'name'));
-});
 
 Route::get('/home', HomePage::class)->name('home');
 Route::get('/categories',CategoriesPage::class);
 Route::get('/categories.edit/{category}',CategoriesEdit::class)->name('category_show');
 Route::get('/categories.create',CategoriesCreate::class)->name('category_create');
 Route::get('/tickets',TicketsPage::class);
+Route::get('/tickets.edit/{ticket}',TicketEdit::class)->name('ticket_edit');
+Route::get('/tickets/{ticket}',HomePage::class)->name('ticket_status');
 Route::get('/users/{user}',UsersPage::class);
 Route::get('/priorities',PrioritiesPage::class);
 Route::get('/status',StatusesPage::class);
