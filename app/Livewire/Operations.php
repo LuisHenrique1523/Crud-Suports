@@ -4,10 +4,10 @@ namespace App\Livewire;
 
 use Livewire\Component;
 
-class PrioritiesPage extends Component
+class Operations extends Component
 {
     public function render()
     {
-        return view('livewire.priorities-page');
+        return view('livewire.operations');
     }
 }

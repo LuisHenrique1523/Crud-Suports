@@ -31,7 +31,7 @@
 
             <div>
                 <x-label for="isAdmin" value="{{ __('Admin flag') }}" />
-                <x-input id="isAdmin" class="block mt-1 w-full" type="text" name="isAdmin" />
+                <x-input id="isAdmin" class="block mt-1 w-full" type="text" placeholder="0" name="isAdmin" />
             </div>
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())

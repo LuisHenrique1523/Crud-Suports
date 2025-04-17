@@ -10,15 +10,14 @@ class HomePage extends Component
 {
     use WithPagination;
     public $categories;
-    public $tickets;
     public $listeners = ['TicketDeleted' => '$refresh'];
     public function mount()
     {
         $this->categories = Category::all();
     }
-    public function update($ticketId)
+    public function update($id)
     {
-        $ticket = Ticket::find($ticketId);
+        $ticket = Ticket::find($id);
 
         if($ticket){
             if($ticket->status){
@@ -29,12 +28,13 @@ class HomePage extends Component
             }
             $ticket->save();
         }
-        return back();
+        return redirect('/home');
     }
     public function render(Ticket $tickets)
     {
         $supports = auth()->user()->tickets;
         $tick = $tickets->orderByDesc('priority')->paginate(10);
+        // dd($supports);
         return view('livewire.home-page',compact('tick','supports'));
     }
 }

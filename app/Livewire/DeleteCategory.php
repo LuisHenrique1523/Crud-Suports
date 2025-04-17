@@ -19,10 +19,10 @@ class DeleteCategory extends Component
     public function DeleteCategory()
     {
         $this->category->delete();
-        session()-> flash('success', 'Ticket removido com sucesso!');
+        session()-> flash('success', 'Categoria removida com sucesso!');
 
         if(!$this->category->delete()){
-            session()->flash('error','Não é posspivel deletar uma categoria em uso');
+            session()->flash('error','Não é possível deletar uma categoria em uso');
             return redirect('/categories');
         }
         $this->dispatch('TicketDeleted');

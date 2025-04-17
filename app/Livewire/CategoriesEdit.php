@@ -8,7 +8,6 @@ use Livewire\Component;
 
 class CategoriesEdit extends Component
 {
-    // public $validated;
     public $id;
     public $name;
     public  $color;

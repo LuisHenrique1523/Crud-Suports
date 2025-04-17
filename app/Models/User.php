@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Models\Comemntary\Commentary;
 use App\Models\Ticket\Ticket;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -81,5 +83,9 @@ class User extends Authenticatable
     public function replies()
     {
         return $this->hasOne(RepliesTickets::class);
+    }
+    public function commentaries()
+    {
+        return $this->hasMany(Commentary::class);
     }
 }

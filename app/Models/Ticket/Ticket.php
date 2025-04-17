@@ -3,6 +3,7 @@
 namespace App\Models\Ticket;
 
 use App\Models\Category\category;
+use App\Models\Comemntary\Commentary;
 use App\Models\RepliesTickets;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
@@ -15,6 +16,10 @@ class Ticket extends Model
     public function replies()
     {
         return $this->hasMany(RepliesTickets::class,'ticket_id', 'id');
+    }
+    public function commentaries()
+    {
+        return $this->hasMany(Commentary::class);
     }
     public function user()
     {

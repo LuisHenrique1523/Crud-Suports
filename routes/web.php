@@ -7,11 +7,12 @@ use App\Livewire\{
     CategoriesPage,
     CategoriesCreate,
     CategoriesEdit,
+    Commentaries,
+    CommentariesCreate,
+    Operations,
     TicketsPage,
     UsersPage,
-    PrioritiesPage,
     Replies,
-    StatusesPage,
     ShowPage,
     TicketEdit,
 };
@@ -24,10 +25,14 @@ Route::get('/tickets',TicketsPage::class);
 Route::get('/tickets.edit/{ticket}',TicketEdit::class)->name('ticket_edit');
 Route::get('/tickets/{ticket}',HomePage::class)->name('ticket_status');
 Route::get('/users/{user}',UsersPage::class);
-Route::get('/priorities',PrioritiesPage::class);
-Route::get('/status',StatusesPage::class);
 Route::get('/show/{id}',ShowPage::class)->name('show');
 Route::get('/replies',Replies::class);
+Route::get('/operations',Operations::class);
+Route::get('/operations.edit/{operation}',Operations::class);
+Route::get('/operations.create',Operations::class);
+Route::get('/comments',Commentaries::class);
+Route::get('/comments.edit/{coment}',Commentaries::class);
+Route::get('/comments.create',CommentariesCreate::class);
 
 Route::get('/',function () 
 {

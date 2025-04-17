@@ -15,21 +15,21 @@ class TicketEdit extends Component
     public $categories;
     public $category_id;
     public $tickets;
+    public $priority;
 
     protected $rules = [
         'subject' => 'required',
         'description' => 'required',
-        'category_id' => 'required'
+        'category_id' => 'required',
+        'priority' => 'required',
     ];
 
     public function mount(Ticket $ticket)
     {
-        // $this->id = $ticket->id;
         $this->subject = $ticket->subject;
         $this->description = $ticket->description;
-        // $this->priority = $ticket->priority;
-        // $this->status = $ticket->status;
         $this->category_id = $ticket->category_id;
+        $this->priority = $ticket->priority;
 
         $this->categories = Category::all();
         $this->tickets = Ticket::all();
@@ -40,6 +40,7 @@ class TicketEdit extends Component
             'subject' => 'required',
             'description' => 'required',
             'category_id' => 'required',
+            'priority' => 'required',
         ]);
         
         $this->ticket->update($validated);

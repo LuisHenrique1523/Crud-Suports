@@ -8,6 +8,7 @@
             <input type="radio" wire:model="priority" id="small-input" name="High" value="3"> Alta <br>
             <input type="radio" wire:model="priority" id="small-input" name="Medium" value="2"> Média <br>
             <input type="radio" wire:model="priority" id="small-input" name="Low" value="1"> Baixa <br>
+            <button href="{{ route('home')}}"type="submit" class="btn btn-primary">Salvar</button>
         </div>
         @else
         <div>

@@ -21,7 +21,7 @@ class CategoriesCreate extends Component
     }
     public function mount(Category $category)
     {
-        $this -> categories = Category::all();
+        $this->categories = Category::all();
     }
     public function render()
     {
