@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Models\Comemntary\Commentary;
+use App\Models\Operation\Operation;
 use App\Models\Ticket\Ticket;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -22,14 +23,6 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
-
-    // public const ROLE_ADMIN = '1';
-    // public const ROLE_USER = '0';
-
-    // public const ROLES = [
-    //         self::ROLE_ADMIN => '1',
-    //         self::ROLE_USER => '0',
-    // ];
 
     /**
      * The attributes that are mass assignable.
@@ -87,5 +80,9 @@ class User extends Authenticatable
     public function commentaries()
     {
         return $this->hasMany(Commentary::class);
+    }
+    public function operations()
+    {
+        return $this->hasMany(Operation::class);
     }
 }

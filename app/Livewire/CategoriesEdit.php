@@ -3,7 +3,6 @@
 namespace App\Livewire;
 
 use App\Models\Category\Category;
-use Illuminate\Http\Client\Request;
 use Livewire\Component;
 
 class CategoriesEdit extends Component

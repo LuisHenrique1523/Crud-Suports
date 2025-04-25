@@ -44,7 +44,8 @@
                     {{ __('Cancel') }}
                 </x-secondary-button>
 
-                <x-danger-button class="ms-3" wire:click="deleteUser" wire:loading.attr="disabled">
+                {{-- <livewire:delete-user :id="auth()->user()->id" > --}}
+                <x-danger-button class="ms-3" wire:click="deleteUser" >
                     {{ __('Delete Account') }}
                 </x-danger-button>
             </x-slot>

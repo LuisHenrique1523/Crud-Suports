@@ -33,8 +33,8 @@ class HomePage extends Component
     public function render(Ticket $tickets)
     {
         $supports = auth()->user()->tickets;
-        $tick = $tickets->orderByDesc('priority')->paginate(10);
-        // dd($supports);
+        $tick = $tickets->orderBy('priority')->paginate(10);
+        // dd($tick);
         return view('livewire.home-page',compact('tick','supports'));
     }
 }

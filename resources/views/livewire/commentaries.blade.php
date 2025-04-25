@@ -1,5 +1,4 @@
 <div>
-    <button href="/comments.create" wire:navigate class="btn btn-primary">Criar Comentário</button>
     <div style="text-align:center; table-layout:auto; width:170%; border:1px solid; margin-bottom:0px;">
         <table style="margin-bottom:0px;" class="table">
             <thead>
@@ -18,8 +17,12 @@
                         <td>{{$commentary->user->name}}</td>
                         <td>{{$commentary->content}}</td>
                         <td>{{$commentary->ticket->subject}}</td>                            
-                        <td><button type="button" class="btn btn-info">Editar</button></td>
-                        <td><button type="button" class="btn btn-danger">Deletar</button></td>
+                        <td>
+                            <a href="{{ route('comment_edit', ['comment'=>$commentary->id]) }}">
+                                <button type="button" class="btn btn-sm btn-info">Editar</button>
+                            </a>
+                        </td>
+                        <td><livewire:delete-comment :id="$commentary->id" ></td>
                     </tr>
                 @endforeach
                 @else
@@ -31,11 +34,14 @@
                 @if ($comments->count() > 0)
                     @foreach ($comments as $comment)
                         <tr>
-                            <td>{{$commentary->user->name}}</td>
-                            <td>{{$commentary->content}}</td>
-                            <td>{{$commentary->ticket->subject}}</td>
-                            <td><button type="button" class="btn btn-info">Editar</button></td>
-                            <td><button type="button" class="btn btn-danger">Deletar</button></td>
+                            <td>{{$comment->user->name}}</td>
+                            <td>{{$comment->content}}</td>
+                            <td>{{$comment->ticket->subject}}</td>
+                            <td><a href="{{ route('comment_edit', ['comment'=>$comment->id]) }}">
+                                <button type="button" class="btn btn-info">Editar</button>
+                                </a>
+                            </td>
+                            <td><livewire:delete-comment :id="$comment->id" ></td>
                         </tr>
                     @endforeach
                 @else
@@ -47,4 +53,8 @@
         </tbody>
         </table>
     </div>
+    <button style="background-color: black; color: aliceblue;" href="/comments.create" wire:navigate class="btn btn-sm">Criar Comentário</button>
+    <a href="{{ route('home') }}">
+        <button type="button" class="btn btn-sm btn-danger">Voltar</button>
+    </a>
 </div>

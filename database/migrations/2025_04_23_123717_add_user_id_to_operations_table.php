@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('commentaries', function (Blueprint $table) {
-            $table->foreignId('ticket_id')
+        Schema::table('operations', function (Blueprint $table) {
+            $table->foreignId('user_id')
             ->constrained()
             ->onUpdate('cascade');
         });
@@ -23,8 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('commentaries', function (Blueprint $table) {
-            $table->foreignId('ticket_id')
+        Schema::table('operations', function (Blueprint $table) {
+            $table->foreignId('user_id')
             ->constrained()
             ->onUpdate('cascade');
         });

@@ -1,8 +1,8 @@
 <div>
-    <div class="col-12">
-        @if (session()->has('success'))
-            <div class="alert alert-success">
-                {{ ('Categoria deletada com sucesso!' )}}
+    <div class="col-15">
+        @if (session()->has('error'))
+            <div class="alert alert-danger">
+                {{ ('Não é possível deletar uma categoria em uso!' )}}
             </div>
         @endif
     </div>
@@ -23,7 +23,7 @@
                     <td style="background: {{$category->color}}; border: none;">{{$category->name}}</td>
                     <td style="background: {{$category->color}}; border: none;">
                         <a href="{{ route('category_show', ['category'=>$category->id]) }}">
-                        <button type="button" class="btn btn-info">Editar</button>
+                            <button type="button" class="btn btn-sm btn-info">Editar</button>
                         </a>
                     </td>
                     <td style="background: {{$category->color}}; border: none;">
@@ -40,6 +40,6 @@
         </table>
     </div>
     <a href="{{route('category_create')}}">
-        <button style="background-color: black; color: aliceblue;" type="submit" class="btn">Criar Nova Categoria</button>
+        <button style="background-color: black; color: aliceblue;" type="submit" class="btn btn-sm">Criar Nova Categoria</button>
     </a>
 </div>

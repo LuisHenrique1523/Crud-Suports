@@ -3,14 +3,11 @@
 namespace App\Models\Priority;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Enums\PriorityEnum;
 
 class Priority extends Model
 {
-    protected $table = 'priority';
-    protected $fillable = ['priority'];
-
-    public function tickets()
-    {
-        return $this->hasMany(Priority::class);
-    }
+    protected $casts = [
+        'priority' => PriorityEnum::class,
+    ];
 }

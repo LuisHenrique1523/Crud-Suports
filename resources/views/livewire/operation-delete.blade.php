@@ -1,6 +1,6 @@
 <div>
     <button
-        wire:click.prevent="DeleteTicket"
+        wire:click.prevent="DeleteOperation"
         class="btn btn-sm btn-danger">
         Deletar
     </button>

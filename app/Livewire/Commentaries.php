@@ -7,6 +7,7 @@ use Livewire\Component;
 
 class Commentaries extends Component
 {
+    public $id;
     public $commentaries;
     public function mount()
     {

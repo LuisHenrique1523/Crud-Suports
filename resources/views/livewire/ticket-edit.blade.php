@@ -5,10 +5,13 @@
         @if (Auth()->user()->isAdmin==1)
         <div class="text-lg">
             <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Priority</label> <br>
-            <input type="radio" wire:model="priority" id="small-input" name="High" value="3"> Alta <br>
-            <input type="radio" wire:model="priority" id="small-input" name="Medium" value="2"> Média <br>
-            <input type="radio" wire:model="priority" id="small-input" name="Low" value="1"> Baixa <br>
+            <input type="radio" wire:model="priority" id="small-input" name="High" value="0"> Alta <br>
+            <input type="radio" wire:model="priority" id="small-input" name="Medium" value="1"> Média <br>
+            <input type="radio" wire:model="priority" id="small-input" name="Low" value="2"> Baixa <br>
             <button href="{{ route('home')}}"type="submit" class="btn btn-primary">Salvar</button>
+            <a href="javascript:history.back()">
+                <button type="button" class="btn btn-sm btn-danger">Cancelar</button>
+            </a>
         </div>
         @else
         <div>
@@ -31,6 +34,9 @@
         </div>
         <br>
         <button href="{{ route('home')}}"type="submit" class="btn btn-primary">Salvar</button>
+        <a href="javascript:history.back()">
+            <button type="button" class="btn btn-sm btn-danger">Voltar</button>
+        </a>
         @endif
     </form>
 </div>

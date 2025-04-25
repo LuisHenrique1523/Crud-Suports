@@ -16,13 +16,16 @@ class DeleteTicket extends Component
 
     public function DeleteTicket()
     {
-        $this->ticket->delete();
-
-        // session()-> flash('success', 'Ticket removido com sucesso!');
+        try{
+            if(!$this->ticket->delete()){
+                throw new \Exception('Não é possivel deletar um ticket em uso',1);
+            }
+        }catch(\Exception $e){
+            session()->flash('error','Não é possível deletar um ticket em uso');
+            return redirect('/home');
+        }
 
         $this->dispatch('TicketDeleted');
-
-        // session()-> flash('error', 'Ticket não encontrado!');
         return redirect('/home');
     }
 

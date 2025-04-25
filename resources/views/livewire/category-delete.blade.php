@@ -1,7 +1,8 @@
 <div>
     <button
         wire:click.prevent="DeleteCategory"
-        class="btn btn-danger">
+        wire:wire:click="$refresh"
+        class="btn btn-sm btn-danger">
         Deletar
     </button>
 </div>

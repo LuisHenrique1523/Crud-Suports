@@ -10,9 +10,6 @@ use Livewire\{Component};
 
 class ShowPage extends Component
 { 
-    public $replyRecord;
-    public $reply;
-    public $replies_ticket;
     public $getRecord = [];
     public $ticket;
     public function replies(Ticket $tickets) 

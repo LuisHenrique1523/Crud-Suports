@@ -1,4 +1,11 @@
 <div>
+    <div class="col-15">
+        @if (session()->has('error'))
+            <div class="alert alert-danger">
+                {{ ('Não é possível deletar um ticket em uso!' )}}
+            </div>
+        @endif
+    </div>
     <div style="text-align:center; table-layout:auto; width:300%; border:1px solid; margin-bottom:0px;">
         <table style="margin-bottom:0px;" class="table">
             <thead>
@@ -27,12 +34,12 @@
                         <td>{{$ti->status ? 'Aberto' : 'Finalizado' }}</td>
                         <td>
                             <a href="{{ route('show', $ti->id) }}">
-                                <button type="button" class="btn btn-info">Visualizar</button>
+                                <button type="button" class="btn btn-sm btn-info">Visualizar</button>
                             </a>
                         </td>
                         <td>
                             <a href="{{ route('ticket_status',['ticket'=>$ti->id]) }}">
-                                <button wire:click.prevent="update({{$ti->id}})" type="button" class="btn btn-success">Finalizar</button>
+                                <button wire:click.prevent="update({{$ti->id}})" type="button" class="btn btn-sm btn-success">Finalizar</button>
                             </a>
                         </td>
                     </tr>

@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Enums\Priority;
 use Livewire\Component;
 use App\Models\Category\Category;
 use App\Models\Ticket\Ticket;
@@ -37,6 +38,7 @@ class TicketsPage extends Component
     
     public function mount()
     {
+        $this->priority = Priority::cases();
         $this->categories = Category::all();
         $this->tickets = Ticket::all();
     }

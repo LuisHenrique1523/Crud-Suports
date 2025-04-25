@@ -1,10 +1,15 @@
 <div>
+    <div class="offset-9 col-12">
+    <a href="{{ route('home') }}">
+        <button type="button" class="btn btn-sm btn-danger">Voltar</button>
+    </a>
+    </div>
     <div class="card offset-9 col-12">
         <div>
             <h5 style="background-color: black; color: aliceblue;" class="card-header">Visualizar Ticket
                 @if ($getRecord->status == 1)
                     <a href="{{ route('ticket_edit', ['ticket'=>$getRecord->id]) }}">
-                        <button type="button" class="btn btn-info">Editar</button>
+                        <button type="button" class="btn btn-sm btn-info">Editar</button>
                     </a>
                     @endif
                     @if (!Auth()->user()->isAdmin==1)
@@ -29,4 +34,8 @@
     </div>
     <br>
         <livewire:replies :ticket="$getRecord"/>
+        
+        @if(Auth()->user()->isAdmin==2)
+            <livewire:operations-create :ticket="$getRecord"/>
+        @endif
 </div>

@@ -1,6 +1,5 @@
 <?php
 
-use App\Enums\TicketStatus;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\{
     HomePage,
@@ -9,7 +8,10 @@ use App\Livewire\{
     CategoriesEdit,
     Commentaries,
     CommentariesCreate,
+    CommentariesEdit,
     Operations,
+    OperationsCreate,
+    OperationsEdit,
     TicketsPage,
     UsersPage,
     Replies,
@@ -27,11 +29,11 @@ Route::get('/tickets/{ticket}',HomePage::class)->name('ticket_status');
 Route::get('/users/{user}',UsersPage::class);
 Route::get('/show/{id}',ShowPage::class)->name('show');
 Route::get('/replies',Replies::class);
-Route::get('/operations',Operations::class);
-Route::get('/operations.edit/{operation}',Operations::class);
-Route::get('/operations.create',Operations::class);
+Route::get('/operations',Operations::class)->name('operations');
+Route::get('/operations.edit/{operation}',OperationsEdit::class)->name('operation_edit');
+Route::get('/operations.create/{ticket}',OperationsCreate::class)->name('operation_create');
 Route::get('/comments',Commentaries::class);
-Route::get('/comments.edit/{coment}',Commentaries::class);
+Route::get('/comments.edit/{comment}',CommentariesEdit::class)->name('comment_edit');
 Route::get('/comments.create',CommentariesCreate::class);
 
 Route::get('/',function () 
