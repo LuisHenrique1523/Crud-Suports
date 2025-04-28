@@ -17,7 +17,6 @@ class Ticket extends Model
     protected $casts = [
         'priority' => Priority::class,
     ];
-
     public function replies()
     {
         return $this->hasMany(RepliesTickets::class,'ticket_id', 'id');

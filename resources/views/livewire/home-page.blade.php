@@ -35,7 +35,9 @@
                                     {{$ti->priority->change()}}
                                 </span>
                             </td>
-                            <td>{{$ti->status ? 'Aberto' : 'Finalizado' }}</td>
+                            <td style="color: {{ $ti->status ?  'green' : 'red'}}">
+                                {{$ti->status ? 'Aberto' : 'Finalizado' }}
+                            </td>
                             <td>
                                 <a href="{{ route('show', $ti->id) }}">
                                     <button type="button" class="btn btn-sm btn-info">Visualizar</button>
@@ -84,4 +86,7 @@
             </tbody>         
         </table>
     </div>
+    @if (Auth()->user()->isAdmin==1)
+        {{ $tick->links() }}
+    @endif
 </div>

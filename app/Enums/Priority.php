@@ -12,7 +12,7 @@ enum Priority: string
         return match ($this) 
         {
             self::HIGH => 'Alta',
-            self::MEDIUM => 'Media',
+            self::MEDIUM => 'Média',
             self::LOW => 'Baixa',
         };
     }
