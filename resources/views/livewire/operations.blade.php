@@ -33,7 +33,7 @@
                     @endforeach
                 @else
                     <tr>
-                        <td colspan="6">Nenhuma Operação Registrada</td>
+                        <td colspan="6">Nenhuma operação registrada para esse ticket!</td>
                     </tr>
                 @endif
             </tbody>

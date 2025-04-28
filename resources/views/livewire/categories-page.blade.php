@@ -33,13 +33,16 @@
                 @endforeach
                 @else
                     <tr>
-                        <td colspan="9">Nenhum Ticket Registrado</td>
+                        <td colspan="9">Nenhuma Categoria Registrada</td>
                     </tr>
                 @endif
             </tbody>
         </table>
     </div>
-    <a href="{{route('category_create')}}">
+    <a href="{{ route('category_create') }}">
         <button style="background-color: black; color: aliceblue;" type="submit" class="btn btn-sm">Criar Nova Categoria</button>
+    </a>
+    <a href="{{ route('home') }}">
+        <button class="btn btn-sm btn-danger">Voltar</button>
     </a>
 </div>

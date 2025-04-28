@@ -4,7 +4,7 @@
             <h5 style="background-color: black; color: aliceblue;" class="card-header">Resposta ao Ticket
                 @if (Auth()->user()->isAdmin==1)
                     @if ($ticket->status == 1)
-                        <a href="{{ route('operations') }}">
+                        <a href="{{ route('operations', ['ticket'=>$ticket->id]) }}">
                             <button type="button" class="btn btn-sm btn-secondary">Operações</button>
                         </a>
                         <a href="{{ route('operation_create',['ticket'=>$ticket->id]) }}"> 

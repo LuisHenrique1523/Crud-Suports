@@ -5,7 +5,6 @@ namespace App\Livewire;
 use App\Models\Category\Category;
 use App\Models\RepliesTickets;
 use App\Models\Ticket\Ticket;
-use Illuminate\Mail\Mailables\Content;
 use Livewire\{Component};
 
 class ShowPage extends Component

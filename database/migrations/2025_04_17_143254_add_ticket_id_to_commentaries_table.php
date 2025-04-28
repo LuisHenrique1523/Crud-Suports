@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::table('commentaries', function (Blueprint $table) {
             $table->foreignId('ticket_id')
             ->constrained()
-            ->onUpdate('cascade');
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
         });
     }
 
@@ -26,7 +27,8 @@ return new class extends Migration
         Schema::table('commentaries', function (Blueprint $table) {
             $table->foreignId('ticket_id')
             ->constrained()
-            ->onUpdate('cascade');
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
         });
     }
 };

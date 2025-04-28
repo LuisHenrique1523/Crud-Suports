@@ -13,8 +13,10 @@
                     </a>
                     @endif
                     @if (!Auth()->user()->isAdmin==1)
-                        <livewire:delete-ticket :id="$getRecord->id">
-                    @endif
+                        @if ($getRecord->status == 0)
+                            <livewire:delete-ticket :id="$getRecord->id">
+                        @endif
+                   @endif
                 
             </h5>
         </div>
@@ -25,7 +27,7 @@
             <h5 class="card title">Categoria : {{ $getRecord->category->name }}</h5>
             <h5 class="card title">Assunto : {{ $getRecord->subject }}</h5>
             <h5 class="card title">Descrição : {{ $getRecord->description }}</h5>
-            <h5 class="card title">Prioridade : {{ $getRecord->priority }}</h5>
+            <h5 class="card title">Prioridade : {{ $getRecord->priority->change() }}</h5>
             <h5 class="card title">Status : {{ ($getRecord->status ? 'Aberto' : 'Finalizado') }}</h5>
             @if ($getRecord->status == 0)
                 <h5 class="card title">Data de Finalização :{{$getRecord->updated_at}}</h5>
@@ -37,5 +39,8 @@
         
         @if(Auth()->user()->isAdmin==2)
             <livewire:operations-create :ticket="$getRecord"/>
+        @endif
+        @if(Auth()->user()->isAdmin==2)
+            <livewire:operations :ticket="$getRecord"/>
         @endif
 </div>

@@ -7,7 +7,5 @@ use App\Enums\PriorityEnum;
 
 class Priority extends Model
 {
-    protected $casts = [
-        'priority' => PriorityEnum::class,
-    ];
+    //
 }

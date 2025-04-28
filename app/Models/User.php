@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Enums\Priority;
 use App\Models\Comemntary\Commentary;
 use App\Models\Operation\Operation;
 use App\Models\Ticket\Ticket;
@@ -65,6 +66,7 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
+            'priority' => Priority::class,
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];

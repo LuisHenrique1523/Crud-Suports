@@ -34,7 +34,6 @@ class HomePage extends Component
     {
         $supports = auth()->user()->tickets;
         $tick = $tickets->orderBy('priority')->paginate(10);
-        // dd($tick);
         return view('livewire.home-page',compact('tick','supports'));
     }
 }

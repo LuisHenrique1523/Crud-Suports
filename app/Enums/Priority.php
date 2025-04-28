@@ -1,8 +1,8 @@
 <?php
+
 namespace App\Enums;
 
-
-enum PriorityEnum: string
+enum Priority: string
 {
     case HIGH = '0';
     case MEDIUM = '1';
@@ -14,6 +14,15 @@ enum PriorityEnum: string
             self::HIGH => 'Alta',
             self::MEDIUM => 'Media',
             self::LOW => 'Baixa',
+        };
+    }
+    public function color()
+    {
+        return match ($this)
+        {
+            self::HIGH => 'red',
+            self::MEDIUM => 'yellow',
+            self::LOW => 'green',
         };
     }
 }

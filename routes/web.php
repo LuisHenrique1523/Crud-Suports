@@ -29,7 +29,7 @@ Route::get('/tickets/{ticket}',HomePage::class)->name('ticket_status');
 Route::get('/users/{user}',UsersPage::class);
 Route::get('/show/{id}',ShowPage::class)->name('show');
 Route::get('/replies',Replies::class);
-Route::get('/operations',Operations::class)->name('operations');
+Route::get('/operations/{ticket}',Operations::class)->name('operations');
 Route::get('/operations.edit/{operation}',OperationsEdit::class)->name('operation_edit');
 Route::get('/operations.create/{ticket}',OperationsCreate::class)->name('operation_create');
 Route::get('/comments',Commentaries::class);

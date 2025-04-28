@@ -28,6 +28,7 @@ class CommentariesCreate extends Component
     public function render()
     {
         $ticket = auth()->user()->tickets;
-        return view('livewire.commentaries-create',compact('ticket'));
+        $tic = Ticket::all();
+        return view('livewire.commentaries-create',compact('ticket','tic'));
     }
 }

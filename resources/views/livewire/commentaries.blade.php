@@ -38,7 +38,7 @@
                             <td>{{$comment->content}}</td>
                             <td>{{$comment->ticket->subject}}</td>
                             <td><a href="{{ route('comment_edit', ['comment'=>$comment->id]) }}">
-                                <button type="button" class="btn btn-info">Editar</button>
+                                <button type="button" class="btn btn-sm btn-info">Editar</button>
                                 </a>
                             </td>
                             <td><livewire:delete-comment :id="$comment->id" ></td>
