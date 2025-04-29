@@ -8,7 +8,7 @@
             <input type="radio" wire:model="priority" id="small-input" name="High" value="0"> Alta <br>
             <input type="radio" wire:model="priority" id="small-input" name="Medium" value="1"> Média <br>
             <input type="radio" wire:model="priority" id="small-input" name="Low" value="2"> Baixa <br>
-            <button href="{{ route('home')}}"type="submit" class="btn btn-primary">Salvar</button>
+            <button href="{{ route('home')}}"type="submit" class="btn btn-sm btn-info">Salvar</button>
             <a href="javascript:history.back()">
                 <button type="button" class="btn btn-sm btn-danger">Cancelar</button>
             </a>
@@ -33,9 +33,9 @@
             </select>
         </div>
         <br>
-        <button href="{{ route('home')}}"type="submit" class="btn btn-primary">Salvar</button>
+        <button href="{{ route('home')}}"type="submit" class="btn btn-sm btn-info">Salvar</button>
         <a href="javascript:history.back()">
-            <button type="button" class="btn btn-sm btn-danger">Voltar</button>
+            <button type="button" class="btn btn-sm btn-danger">Cancelar</button>
         </a>
         @endif
     </form>

@@ -1,8 +1,8 @@
 <div>
     <div class="col-15">
-        @if (session()->has('error'))
-            <div class="alert alert-danger">
-                {{ ('Não é possível deletar um ticket em uso!' )}}
+        @if (session()->has('success'))
+            <div class="alert alert-success">
+                {{ ("Ticket deletado com sucesso!" )}}
             </div>
         @endif
     </div>
@@ -69,7 +69,9 @@
                                     {{$support->priority->change()}}
                                 </span>
                             </td>
-                            <td>{{($support->status ? 'Aberto' : 'Finalizado') }}</td>
+                            <td style="color: {{ $support->status ?  'green' : 'red'}}">
+                                {{($support->status ? 'Aberto' : 'Finalizado') }}
+                            </td>
                             <td>
                                 <a href="{{ route('show', $support->id) }}">
                                     <button type="button" class="btn btn-info">Visualizar</button>

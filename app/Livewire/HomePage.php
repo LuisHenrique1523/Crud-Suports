@@ -10,6 +10,7 @@ class HomePage extends Component
 {
     use WithPagination;
     public $categories;
+    public Ticket $tickets;
     public $listeners = ['TicketDeleted' => '$refresh'];
     public function mount()
     {

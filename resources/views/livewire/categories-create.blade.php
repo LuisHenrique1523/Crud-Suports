@@ -28,6 +28,8 @@
                 document.getElementById("preview").style.backgroundColor = selectedColor;
             }
         </script>
-        <button type="submit" class="btn btn-primary">Cadastrar</button>
+        <br>
+        <button type="submit" class="btn btn-sm btn-primary">Cadastrar</button>
+        <button wire:navigate href="/categories" class="btn btn-sm btn-danger">Cancelar</button>
     </form>
 </div>

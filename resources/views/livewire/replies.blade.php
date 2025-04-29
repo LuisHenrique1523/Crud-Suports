@@ -29,7 +29,7 @@
                     <form wire:submit.prevent = "submit">
                         <h5 class="card title">Resposta ao Ticket: </h5>
                         <input wire:model="rep" type="text" name="rep">
-                        <button type="submit" class="btn btn-sm btn-primary">Registrar</button>
+                        <button type="submit" class="btn btn-sm btn-primary">Cadastrar</button>
                     </form>
                 </div>
             @endif

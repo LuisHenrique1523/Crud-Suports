@@ -28,7 +28,7 @@
         </div>
         <button href="{{ route('home') }}" type="submit" class="btn btn-sm btn-primary">Cadastrar</button>
         <a href="javascript:history.back()">
-            <button type="button" class="btn btn-sm btn-danger">Voltar</button>
+            <button type="button" class="btn btn-sm btn-danger">Cancelar</button>
         </a>
     </form>
 </div>

@@ -28,7 +28,8 @@
                 document.getElementById("preview").style.backgroundColor = selectedColor;
             }
         </script>
-        <button type="button" wire:click="categoryEdit({{$category}})" class="btn btn-sm btn-info">Atualizar</button>
+        <br>
+        <button type="button" wire:click="categoryEdit({{$category}})" class="btn btn-sm btn-info">Salvar</button>
         <button wire:navigate href="/categories" class="btn btn-sm btn-danger">Cancelar</button>
     </form>
 </div>
