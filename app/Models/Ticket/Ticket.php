@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ticket extends Model
 {
     protected $table = 'tickets';
-    protected $fillable = ['subject','description','priority','status'];
+    protected $fillable = ['subject','description','priority','status','category_id'];
     protected $casts = [
         'priority' => Priority::class,
     ];

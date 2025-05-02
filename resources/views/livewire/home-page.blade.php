@@ -59,7 +59,7 @@
                 @if ($supports->count() > 0)
                     @foreach ($supports as $support)
                         <tr>
-                            <td>{{$support->user->name}}</td>
+                            <td>{{$support->user->name }}</td>
                             <td>{{$support->user->email}}</td>
                             <td>{{$support->category->name}}</td>
                             <td>{{$support->subject}}</td>

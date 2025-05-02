@@ -11,7 +11,6 @@ class TicketEdit extends Component
     public $subject;
     public $description;
     public Ticket $ticket;
-    public $category;
     public $categories;
     public $category_id;
     public $tickets;
@@ -24,7 +23,7 @@ class TicketEdit extends Component
         'priority' => 'required',
     ];
 
-    public function mount(Ticket $ticket)
+    public function mount($ticket)
     {
         $this->subject = $ticket->subject;
         $this->description = $ticket->description;
@@ -42,7 +41,6 @@ class TicketEdit extends Component
             'category_id' => 'required',
             'priority' => 'required',
         ]);
-        
         $this->ticket->update($validated);
         
         return redirect()->to('/home');

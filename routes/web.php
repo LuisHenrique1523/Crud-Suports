@@ -13,10 +13,10 @@ use App\Livewire\{
     OperationsCreate,
     OperationsEdit,
     TicketsPage,
+    TicketEdit,
+    ShowPage,
     UsersPage,
     Replies,
-    ShowPage,
-    TicketEdit,
 };
 
 Route::get('/home', HomePage::class)->name('home');

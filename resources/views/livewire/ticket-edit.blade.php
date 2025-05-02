@@ -24,8 +24,8 @@
         </div>
         
         <div>
-            <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Categoria</label>
-            <select id="category" wire:model="category_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <label for="category_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Categoria</label>
+            <select id="category_id" wire:model="category_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option selected>Selecione uma categoria</option>    
                 @foreach ($categories as $category)
                 <option value="{{$category->id}}" >{{$category->name}}</option>
@@ -33,7 +33,7 @@
             </select>
         </div>
         <br>
-        <button href="{{ route('home')}}"type="submit" class="btn btn-sm btn-info">Salvar</button>
+        <button type="button" wire:click="ticketEdit({{$ticket}})" class="btn btn-sm btn-info">Salvar</button>
         <a href="javascript:history.back()">
             <button type="button" class="btn btn-sm btn-danger">Cancelar</button>
         </a>

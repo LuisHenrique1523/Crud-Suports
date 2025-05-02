@@ -21,7 +21,7 @@
         </div>
         <br>
         <div class="text-lg">
-            <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Priority</label> <br>
+            <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Prioridade</label> <br>
             <input type="radio" wire:model="priority" id="small-input" name="High" value="0"> Alta <br>
             <input type="radio" wire:model="priority" id="small-input" name="Medium" value="1"> Média <br>
             <input type="radio" wire:model="priority" id="small-input" name="Low" value="2"> Baixa <br>

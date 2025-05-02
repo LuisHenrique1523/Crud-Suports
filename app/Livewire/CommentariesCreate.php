@@ -21,10 +21,6 @@ class CommentariesCreate extends Component
         
         return redirect('/comments');
     }
-    public function mount()
-    {
-
-    }
     public function render()
     {
         $ticket = auth()->user()->tickets;
