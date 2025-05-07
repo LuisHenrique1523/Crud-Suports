@@ -24,7 +24,12 @@ class CommentariesCreate extends Component
     public function render()
     {
         $ticket = auth()->user()->tickets;
-        $tic = Ticket::all();
+        $tic = Ticket::query()
+        ->when(
+            'is not admin', 
+            fn($q) => $q->where('user_id', auth()->id())
+        )
+        ->get();
         return view('livewire.commentaries-create',compact('ticket','tic'));
     }
 }

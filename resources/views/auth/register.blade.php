@@ -28,10 +28,10 @@
                 <x-label for="password_confirmation" value="{{ __('Confirmar Senha') }}" />
                 <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation"/>
             </div>
-
+            <br>
             <div>
-                <x-label for="isAdmin" value="{{ __('Código Admin') }}" />
-                <x-input id="isAdmin" class="block mt-1 w-full" type="text" placeholder="0" name="isAdmin" />
+                <x-label for="isAdmin" value="{{ __('É um administrador?') }}" />
+                <x-checkbox wire:model="isAdmin" value="1" id="isAdmin" name="isAdmin" />
             </div>
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())

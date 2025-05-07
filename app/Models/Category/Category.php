@@ -3,7 +3,6 @@
 namespace App\Models\Category;
 
 use Illuminate\Database\Eloquent\Model;
-use PHPUnit\Framework\Attributes\Ticket;
 
 class Category extends Model
 {

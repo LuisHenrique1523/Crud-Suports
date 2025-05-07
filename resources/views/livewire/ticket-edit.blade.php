@@ -1,14 +1,16 @@
 <div>
     <h1>Editar Ticket</h1>
 
-    <form class="max-w-md mx-auto" wire:submit.prevent="ticketEdit">
+    <form class="max-w-md mx-auto" wire:submit="ticketEdit">
         @if (Auth()->user()->isAdmin==1)
         <div class="text-lg">
             <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Priority</label> <br>
             <input type="radio" wire:model="priority" id="small-input" name="High" value="0"> Alta <br>
             <input type="radio" wire:model="priority" id="small-input" name="Medium" value="1"> Média <br>
             <input type="radio" wire:model="priority" id="small-input" name="Low" value="2"> Baixa <br>
-            <button href="{{ route('home')}}"type="submit" class="btn btn-sm btn-info">Salvar</button>
+            <a href="{{ route('show', $id)}}">
+            <button type="submit" class="btn btn-sm btn-info">Salvar</button>
+            </a>
             <a href="javascript:history.back()">
                 <button type="button" class="btn btn-sm btn-danger">Cancelar</button>
             </a>

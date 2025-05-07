@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\{
     HomePage,
     CategoriesPage,
-    CategoriesCreate,
     CategoriesEdit,
     Commentaries,
     CommentariesCreate,
@@ -12,7 +11,6 @@ use App\Livewire\{
     Operations,
     OperationsCreate,
     OperationsEdit,
-    TicketsPage,
     TicketEdit,
     ShowPage,
     UsersPage,
@@ -20,10 +18,8 @@ use App\Livewire\{
 };
 
 Route::get('/home', HomePage::class)->name('home');
-Route::get('/categories',CategoriesPage::class);
+Route::get('/categories',CategoriesPage::class)->name('category');
 Route::get('/categories.edit/{category}',CategoriesEdit::class)->name('category_show');
-Route::get('/categories.create',CategoriesCreate::class)->name('category_create');
-Route::get('/tickets',TicketsPage::class);
 Route::get('/tickets.edit/{ticket}',TicketEdit::class)->name('ticket_edit');
 Route::get('/tickets/{ticket}',HomePage::class)->name('ticket_status');
 Route::get('/users/{user}',UsersPage::class);
@@ -48,4 +44,7 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+    Route::get('/categories', function () {
+        return view('categories');
+    })->name('categories');
 });

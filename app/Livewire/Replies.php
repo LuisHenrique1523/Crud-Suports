@@ -13,6 +13,12 @@ class Replies extends Component
 {
     public $rep;
     public Ticket $ticket;
+
+    public function mount(Ticket $ticket)
+    {
+        $this->ticket = $ticket;
+    }
+    
     public function submit()
     {
         $reply = new RepliesTickets;
@@ -21,10 +27,7 @@ class Replies extends Component
         $reply->reply = $this->rep;
         $reply->save();
     }
-    public function mount(Ticket $ticket)
-    {
-        $this->ticket = $ticket;
-    }
+
 
     public function render()
     {   

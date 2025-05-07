@@ -14,10 +14,11 @@ class OperationDelete extends Component
     }
     public function DeleteOperation()
     {
-        $this->operation->delete();
+        if($this->operation->delete()){
         
             return redirect('home');
-            
+        }
+        
         $this->dispatch('ComentaryDeleted');
         $this ->dispatch('refresh');
     }

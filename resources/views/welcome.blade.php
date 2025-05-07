@@ -8,7 +8,7 @@
 </head>
 
 <body>    
-    @livewire('home-page')  
+    @livewire('home-page')
 </body>
 
 </html>

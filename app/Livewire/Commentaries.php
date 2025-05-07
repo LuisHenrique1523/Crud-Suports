@@ -9,6 +9,10 @@ class Commentaries extends Component
 {
     public $id;
     public $commentaries;
+    public $listeners = [
+        'ComentaryDeleted' => '$refresh',
+        'refresh' => '$refresh',
+    ];
     public function mount()
     {
         $this->commentaries = Commentary::all();

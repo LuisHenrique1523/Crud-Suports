@@ -69,6 +69,7 @@ class User extends Authenticatable
             'priority' => Priority::class,
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'isAdmin' => 'string',
         ];
     }
     public function tickets()

@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Operation\Operation;
+use Dom\Document;
 use Livewire\Component;
 
 class OperationsCreate extends Component
@@ -18,9 +19,9 @@ class OperationsCreate extends Component
         $operation->user_id = auth()->id();
         $operation->ticket_id = $this->ticket;
         $operation->description = $this->description;
-        $operation->save();
+        $operation->save();        
 
-        return redirect('home');
+        return redirect(route('show',$this->ticket));
     }
     public function render()
     {

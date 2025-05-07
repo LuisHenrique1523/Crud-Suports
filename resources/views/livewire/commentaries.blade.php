@@ -1,4 +1,11 @@
 <div>
+    <div class="col-15">
+        @if (session()->has('success'))
+            <div class="alert alert-success">
+                {{ ('Comentário Deletado Com Sucesso!' )}}
+            </div>
+        @endif
+    </div>
     <div style="text-align:center; table-layout:auto; width:170%; border:1px solid; margin-bottom:0px;">
         <table style="margin-bottom:0px;" class="table">
             <thead>

@@ -18,11 +18,11 @@ class DeleteCategory extends Component
     public function DeleteCategory()
     {
         try{
-            if(!$this->category->delete()){
-                throw new \Exception('Não é possivel deletar uma categoria em uso',1);
+            if($this->category->delete()){
+                session()->flash('success');
             }
         }catch(\Exception $e){
-            session()->flash('error','Não é possível deletar uma categoria em uso');
+            session()->flash('error');
         }
 
         $this->dispatch('CategoryDeleted');

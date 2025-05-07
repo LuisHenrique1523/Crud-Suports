@@ -25,10 +25,6 @@ class DeleteUser implements DeletesUsers
             }
         }catch(\Exception $e){
             session()->flash('error','Não é possível deletar uma usuário em uso');
-            // ->redirect(view('livewire.home-page'));
-
-            // $this->dispatch('UserDeleted');
-            // $this ->dispatch('refresh');
         }
     }
 }

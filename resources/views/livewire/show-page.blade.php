@@ -17,7 +17,6 @@
                             <livewire:delete-ticket :id="$getRecord->id">
                         @endif
                    @endif
-                
             </h5>
         </div>
         <div class="card-body">
