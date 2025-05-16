@@ -1,7 +1,0 @@
-<div>
-    <button
-        wire:click.prevent="DeleteTicket"
-        class="btn btn-sm btn-danger">
-        Deletar
-    </button>
-</div>

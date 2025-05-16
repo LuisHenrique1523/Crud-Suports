@@ -5,56 +5,63 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Category\Category;
 
-class CategoriesPage extends Component
+class CategoriesPage extends Component 
 {
-    public $category;
+    public $id;
+    public Category $category;
     public $categories;
     public $name;
     public $color;
     public $confirmingCategoryAdd = false;
     public $confirmingCategoryEdit = false;
-    public $listeners = [
-        'CategoryDeleted' => '$refresh',
-        'refresh' => '$refresh',
-    ];
     protected $rules = [
-        'name' => 'required',
-        'color' => 'required'
+        'name' => 'required|string|max:255',
+        'color' => 'required|string',
     ];
     public function mount(Category $category)
     {
         $this->categories = Category::all();
-
+        $this->category = $category;
+    }
+    public function confirmCategoryAdd()
+    {
+        $this->reset(['name','color']);
+        $this->confirmingCategoryAdd = true;
     }
     public function submit()
     {
         $this->validate();
-
-        if(isset($this->category->id)){
-            $this->category->update();
-        } else{
             $category = new Category;
             $category->name = $this->name;
             $category->color = $this->color;
-            $category->save();
             
-            return redirect()->to('/categories');
-        }
-        $this->confirmingCategoryAdd = false;
-    }
-    public function render()
-    {
-        return view('livewire.categories-page');
-    }
-    public function confirmCategoryAdd()
-    {
-        $this->reset(['category']);
-        $this->confirmingCategoryAdd = true;
+            $category->save();
+
+        return redirect()->route('categories');
     }
     public function confirmCategoryEdit(Category $category)
     {
-        $this->category = $category;
-        $this->confirmingCategoryAdd = true;
+        $this->id = $category->id;
+        $this->name = $category->name;
+        $this->color = $category->color;
+
+        $this->confirmingCategoryEdit = true;
+    }
+    public function categoryEdit(Category $category)
+    {
+        $this->validate();
+
+        $category = Category::find($this->id);
+        if (!$category) {
+            session()->flash('error', 'Categoria não encontrada.');
+            return;
+        }
+
+        $category->name = $this->name;
+        $category->color = $this->color;
+        $category->save();
+
+        return redirect()->route('categories');
     }
     public function confirmCategoryDeletion( Category $category)
     {
@@ -69,5 +76,10 @@ class CategoriesPage extends Component
         $this->dispatch('CategoryDeleted');
         $this ->dispatch('refresh');
         return redirect('/categories');
+    }
+    
+    public function render()
+    {
+        return view('livewire.categories');
     }
 }

@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::table('tickets', function (Blueprint $table) {
             $table->foreignId('user_id')
             ->constrained()
-            ->onUpdate('cascade');
+            ->cascadeOnDelete()
+            ->cascadeOnUpdate();
         });
     }
 
@@ -26,7 +27,8 @@ return new class extends Migration
         Schema::table('tickets', function (Blueprint $table) {
             $table->foreignId('user_id')
             ->constrained()
-            ->onUpdate('cascade');
+            ->cascadeOnDelete()
+            ->cascadeOnUpdate();
         });
     }
 };

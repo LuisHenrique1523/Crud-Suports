@@ -1,36 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Livewire\{
-    HomePage,
-    CategoriesPage,
-    CategoriesEdit,
-    Commentaries,
-    CommentariesCreate,
-    CommentariesEdit,
-    Operations,
-    OperationsCreate,
-    OperationsEdit,
-    TicketEdit,
-    ShowPage,
-    UsersPage,
-    Replies,
-};
-
-Route::get('/home', HomePage::class)->name('home');
-Route::get('/categories',CategoriesPage::class)->name('category');
-Route::get('/categories.edit/{category}',CategoriesEdit::class)->name('category_show');
-Route::get('/tickets.edit/{ticket}',TicketEdit::class)->name('ticket_edit');
-Route::get('/tickets/{ticket}',HomePage::class)->name('ticket_status');
-Route::get('/users/{user}',UsersPage::class);
-Route::get('/show/{id}',ShowPage::class)->name('show');
-Route::get('/replies',Replies::class);
-Route::get('/operations/{ticket}',Operations::class)->name('operations');
-Route::get('/operations.edit/{operation}',OperationsEdit::class)->name('operation_edit');
-Route::get('/operations.create/{ticket}',OperationsCreate::class)->name('operation_create');
-Route::get('/comments',Commentaries::class);
-Route::get('/comments.edit/{comment}',CommentariesEdit::class)->name('comment_edit');
-Route::get('/comments.create',CommentariesCreate::class);
+use app\Http\Controllers\AdminController;
+use App\Livewire\Admin\Dashboard;
 
 Route::get('/',function () 
 {
@@ -42,9 +14,31 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return view('blade.dashboard');
     })->name('dashboard');
+    
     Route::get('/categories', function () {
-        return view('categories');
+        return view('blade.categories');
     })->name('categories');
+
+    Route::get('/commentaries/ticket/{ticket}', function () {
+        return view('blade.commentaries');
+    })->name('commentaries');
+
+    Route::get('/replies/ticket/{ticket}', function () {
+        return view('blade.replies');
+    })->name('replies');
+
+    Route::get('/operations/ticket/{ticket}', function () {
+        return view('blade.operations');
+    })->name('operations');
+});
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+    'admin',
+])->group(function () {
+    Route::get('/admin/dashboard', Dashboard::class)->name('admin.dashboard');
 });

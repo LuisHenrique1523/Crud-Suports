@@ -12,19 +12,26 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('replies_ticket', function (Blueprint $table) {
-            $table->uuid('id',36)->primary();
+            $table->id();
             $table->text('reply');
             $table->timestamps();
 
             $table->foreignId('user_id')
                 ->references('id')
-                ->on('users');
+                ->on('users')
+                ->cascadeOnDelete();
 
             $table->foreignId('ticket_id')
                 ->references('id')
                 ->on('tickets')
-                ->onDelete('cascade');
-        });
+                ->cascadeOnDelete();
+
+            $table->foreignId('ticket_user_id')
+                ->references('user_id')
+                ->on('tickets')
+                ->cascadeOnDelete();
+
+            });
     }
 
     /**

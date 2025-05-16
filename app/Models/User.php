@@ -9,15 +9,17 @@ use App\Models\Comemntary\Commentary;
 use App\Models\Operation\Operation;
 use App\Models\Ticket\Ticket;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens;
+    use HasApiTokens; use HasRoles;
 
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
@@ -34,7 +36,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'isAdmin',
     ];
 
     /**
@@ -69,7 +70,6 @@ class User extends Authenticatable
             'priority' => Priority::class,
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'isAdmin' => 'string',
         ];
     }
     public function tickets()
@@ -78,7 +78,7 @@ class User extends Authenticatable
     }
     public function replies()
     {
-        return $this->hasOne(RepliesTickets::class);
+        return $this->hasOne(Reply::class);
     }
     public function commentaries()
     {
@@ -87,5 +87,9 @@ class User extends Authenticatable
     public function operations()
     {
         return $this->hasMany(Operation::class);
+    }
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class);
     }
 }

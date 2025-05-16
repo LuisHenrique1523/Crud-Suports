@@ -29,10 +29,6 @@
                 <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation"/>
             </div>
             <br>
-            <div>
-                <x-label for="isAdmin" value="{{ __('É um administrador?') }}" />
-                <x-checkbox wire:model="isAdmin" value="1" id="isAdmin" name="isAdmin" />
-            </div>
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                 <div class="mt-4">
