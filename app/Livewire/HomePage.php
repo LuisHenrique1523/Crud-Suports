@@ -24,8 +24,8 @@ class HomePage extends Component
     protected $rules = [
         'subject' => 'required|string|max:255',
         'description' => 'required|string|max:255',
-        'priority' => 'required|string',
         'category_id' => 'required',
+        'priority' => 'required|string',
     ];
     public function mount()
     {
@@ -84,7 +84,7 @@ class HomePage extends Component
 
         $ticket = Ticket::find($this->id);
         if (!$ticket) {
-            session()->flash('error', 'Categoria não encontrada.');
+            session()->flash('error', 'Ticket não encontrado.');
             return;
         }
 
@@ -101,7 +101,7 @@ class HomePage extends Component
     {
         $this->pc = $support;
         $showtickets = Ticket::where('id',$support)->first();
-        // dd($this->pc);
+
         $this->confirmingTicketShow = true;
     }
     public function confirmTicketDeletion( Ticket $ticket)
@@ -124,13 +124,13 @@ class HomePage extends Component
     public function render(Ticket $tickets)
     {
         $supports = auth()->user()->tickets()->orderBy('priority')->get();
-        $tick = $tickets->orderBy('priority')->paginate(10);
+        $adm_tickets = $tickets->orderBy('priority')->paginate(10);
         $showtickets = $this->pc;
 
         return view('livewire.home-page',[
-            'tick' => $tick,
             'supports' => $supports,
             'showticket' => $showtickets,
+            'adm_tickets' => $adm_tickets,
         ]);
     }
 }

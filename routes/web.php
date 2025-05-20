@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use app\Http\Controllers\AdminController;
-use App\Livewire\Admin\Dashboard;
 
 Route::get('/',function () 
 {
@@ -28,17 +26,12 @@ Route::middleware([
     Route::get('/replies/ticket/{ticket}', function () {
         return view('blade.replies');
     })->name('replies');
-
-    Route::get('/operations/ticket/{ticket}', function () {
-        return view('blade.operations');
-    })->name('operations');
 });
 
 Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-    'admin',
+    'isAdmin',
 ])->group(function () {
-    Route::get('/admin/dashboard', Dashboard::class)->name('admin.dashboard');
+    Route::get('/operations/ticket/{ticket}', function () {
+        return view('blade.operations');
+    })->name('operations');
 });

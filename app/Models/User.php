@@ -19,13 +19,9 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens; use HasRoles;
+    use HasApiTokens, HasRoles, HasFactory, HasProfilePhoto, Notifiable, TwoFactorAuthenticatable;
 
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory;
-    use HasProfilePhoto;
-    use Notifiable;
-    use TwoFactorAuthenticatable;
 
     /**
      * The attributes that are mass assignable.
@@ -87,9 +83,5 @@ class User extends Authenticatable
     public function operations()
     {
         return $this->hasMany(Operation::class);
-    }
-    public function roles(): BelongsToMany
-    {
-        return $this->belongsToMany(Role::class);
     }
 }

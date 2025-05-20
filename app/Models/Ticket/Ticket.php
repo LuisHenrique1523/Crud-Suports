@@ -6,7 +6,7 @@ use App\Enums\Priority;
 use App\Models\Category\category;
 use App\Models\Comemntary\Commentary;
 use App\Models\Operation\Operation;
-use App\Models\RepliesTickets;
+use App\Models\Reply;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,7 +19,7 @@ class Ticket extends Model
     ];
     public function replies()
     {
-        return $this->hasMany(RepliesTickets::class,'ticket_id', 'id');
+        return $this->hasMany(Reply::class,'ticket_id', 'id');
     }
     public function commentaries()
     {

@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::table('tickets', function (Blueprint $table) {
             $table->foreignId('category_id')
-            ->constrained()
-            ->onUpdate('cascade');
+            ->constrained();
         });
     }
 
@@ -25,8 +24,7 @@ return new class extends Migration
     {
         Schema::table('tickets', function (Blueprint $table) {
             $table->foreignId('category_id')
-            ->constrained()
-            ->onUpdate('cascade');
+            ->constrained();
         });
     }
 };
