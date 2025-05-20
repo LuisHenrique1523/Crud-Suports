@@ -108,10 +108,10 @@ class HomePage extends Component
     {
         try{
             if($ticket->delete()){
-                session()->flash('success');
+                session()->flash('success', 'Ticket deletado com sucesso!');
             }
         }catch(\Exception $e){
-            session()->flash('error');
+            session()->flash('error', 'Não é possível deletar um ticket em uso!');
         }
 
         $this ->dispatch('refresh');

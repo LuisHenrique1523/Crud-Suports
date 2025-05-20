@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Operation\Operation;
+use App\Models\Ticket\Ticket;
 use Livewire\Component;
 
 class Operations extends Component
@@ -17,7 +18,7 @@ class Operations extends Component
     protected $rules = [
         'description' => 'required|string|max:255',
     ];
-    public function mount(Operation $operation)
+    public function mount(Operation $operation, Ticket $ticket)
     {
         $this->operations = Operation::where('ticket_id', request()->route('ticket'))->get();
         $this->ticket = request()->route('ticket');
@@ -67,10 +68,10 @@ class Operations extends Component
     {
         try{
             if($operation->delete()){
-                session()->flash('success');
+                session()->flash('success', 'Operação deletada com sucesso!');
             }
         }catch(\Exception $e){
-            session()->flash('error');
+            session()->flash('error', 'Não foi possível deletar a operação em uso!');
         }
 
         $this ->dispatch('refresh');

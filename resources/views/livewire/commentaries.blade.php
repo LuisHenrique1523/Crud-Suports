@@ -16,16 +16,16 @@
                     </div>
                 </h2>
                 <div class="col-15">
-                    @if (session()->has('error'))
+                    @session('error')
                         <div class="alert alert-warning">
-                            {{ ('Não é possível deletar este comentário!' )}}
+                            {{$value}}
                         </div>
-                    @endif
-                    @if (session()->has('success'))
+                    @endsession
+                    @session('success')
                         <div class="alert alert-danger">
-                            {{ ('Comentário deletado com sucesso!' )}}
+                            {{$value}}
                         </div>
-                    @endif
+                    @endsession
                 </div>
                 <div style="text-align:center; table-layout:auto; width:300%; margin-bottom:0px;">
                     <table style="margin-bottom:0px; width:30%;" class="table">
@@ -33,8 +33,8 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Usuário</th>
-                            <th scope="col">Conteúdo</th>
                             <th scope="col">Ticket</th>
+                            <th scope="col">Conteúdo</th>
                             <th colspan="2">Ação</th>
                         </tr>
                         </thead>
@@ -44,8 +44,8 @@
                             <tr>
                                 <td>{{$comment->id}}</td>
                                 <td>{{$comment->user->name}}</td>
-                                <td>{{$comment->content}}</td>
                                 <td>{{$comment->ticket->subject}}</td>
+                                <td>{{$comment->content}}</td>
                                 <td>
                                     <button wire:click="confirmCommentEdit( {{$comment->id}} )" wire:loading.attr="disabled">
                                         <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">

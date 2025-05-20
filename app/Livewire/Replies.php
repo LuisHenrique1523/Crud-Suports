@@ -68,10 +68,10 @@ class Replies extends Component
     {
         try{
             if($reply->delete()){
-                session()->flash('success');
+                session()->flash('success', 'Resposta deletada com sucesso!');
             }
         }catch(\Exception $e){
-            session()->flash('error');
+            session()->flash('error', 'Não foi possível deletar esta resposta!');
         }
 
         $this ->dispatch('refresh');
@@ -81,8 +81,10 @@ class Replies extends Component
     public function render( Reply $reply)
     {   
         $this->replies = Reply::where('ticket_id', request()->route('ticket'))->get();
+        $ticket = Ticket::where('id',request()->route('ticket'))->value('status');
 
         return view('livewire.replies',[
+            'ticket' => $ticket,
         ]);
     }
 }

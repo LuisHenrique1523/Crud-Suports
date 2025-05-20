@@ -67,10 +67,10 @@ class Commentaries extends Component
     {
         try{
             if($commentary->delete()){
-                session()->flash('success');
+                session()->flash('success', 'Comentário deletado com sucesso!');
             }
         }catch(\Exception $e){
-            session()->flash('error');
+            session()->flash('error', 'Não foi possível deletar este comentário!');
         }
 
         $this ->dispatch('refresh');

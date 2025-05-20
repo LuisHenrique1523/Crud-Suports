@@ -11,30 +11,31 @@
                             </x-secondary-button>
                         </a>
                         @role('admin')
-                            <x-button wire:click="confirmReplyAdd" style="background: blue">
-                                Nova Resposta
-                            </x-button>
+                            @if ($ticket == 1)
+                                <x-button wire:click="confirmReplyAdd" style="background: blue">
+                                    Nova Resposta
+                                </x-button>
+                            @endif
                         @endrole
                     </div>
                 </h2>
                 <div class="col-15">
-                    @if (session()->has('error'))
+                    @session('error')
                         <div class="alert alert-warning">
-                            {{ ('Não é possível deletar esta resposta!' )}}
+                            {{$value}}
                         </div>
-                    @endif
-                    @if (session()->has('success'))
+                    @endsession
+                    @session('success')
                         <div class="alert alert-danger">
-                            {{ ("Resposta deletada com sucesso!" )}}
+                            {{$value}}
                         </div>
-                    @endif
+                    @endsession
                 </div>
                 <div style="text-align:center; table-layout:auto; width:300%; margin-bottom:0px;">
                     <table style="margin-bottom:0px; width:30%;" class="table">
                         <thead> 
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Administrador</th>
                             <th scope="col">Usuário</th>
                             <th scope="col">Ticket</th>
                             <th scope="col">Resposta</th>
@@ -48,7 +49,6 @@
                                 @foreach ($replies as $reply)
                                    <tr>
                                         <td>{{$reply->id}}</td>
-                                        <td>{{$reply->user_id}}</td>
                                         <td>{{$reply->user->name}}</td>
                                         <td>{{$reply->ticket->subject}}</td>
                                         <td>{{$reply->reply}}</td>

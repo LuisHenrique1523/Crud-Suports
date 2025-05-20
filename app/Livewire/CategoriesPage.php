@@ -67,10 +67,10 @@ class CategoriesPage extends Component
     {
         try{
             if($category->delete()){
-                session()->flash('success');
+                session()->flash('success', 'Categoria deletada com sucesso!');
             }
         }catch(\Exception $e){
-            session()->flash('error');
+            session()->flash('error', 'Não é possível deletar uma categoria em uso!');
         }
 
         $this->dispatch('CategoryDeleted');

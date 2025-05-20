@@ -16,16 +16,16 @@
                     </div>
                 </h2>
                 <div class="col-15">
-                    @if (session()->has('success'))
-                        <div class="alert alert-danger">
-                            {{ ("Ticket deletado com sucesso!" )}}
-                        </div>
-                    @endif
-                    @if (session()->has('error'))
+                    @session('error')
                         <div class="alert alert-warning">
-                            {{ ("Não é possível deletar um ticket em uso!" )}}
+                            {{$value}}
                         </div>
-                    @endif
+                    @endsession
+                    @session('success')
+                        <div class="alert alert-danger">
+                            {{$value}}
+                        </div>
+                    @endsession
                 </div>
                 <div style="text-align:center; table-layout:auto; width:300%; margin-bottom:0px;">
                     <table style="margin-bottom:0px; width:30%;" class="table">

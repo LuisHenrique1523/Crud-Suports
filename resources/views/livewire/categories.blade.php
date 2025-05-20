@@ -3,24 +3,24 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <h2 class="font-semibold fs-1 text-xl text-gray-800 leading-tight flex justify-between">
-                    {{ __('Categorias') }}
+                    {{ __('Categorias') }} 
                     <div class="mr-2">
                         <x-button wire:click="confirmCategoryAdd" style="background: blue">
                             Nova Categoria
                         </x-button>
                     </div>
                 </h2>
-                <div class="col-15">
-                    @if (session()->has('error'))
+                <div class="col-15"> 
+                    @session('error')
                         <div class="alert alert-warning">
-                            {{ ('Não é possível deletar uma categoria em uso!' )}}
+                            {{$value}}
                         </div>
-                    @endif
-                    @if (session()->has('success'))
+                    @endsession
+                    @session('success')
                         <div class="alert alert-danger">
-                            {{ ('Categoria deletada com sucesso!' )}}
+                            {{$value}}
                         </div>
-                    @endif
+                    @endsession
                 </div>
                 <div style="text-align:center; table-layout:auto; width:100%; margin-bottom:0px;" >
                 <table style="margin-bottom:0px; width:30%;" class="table">
