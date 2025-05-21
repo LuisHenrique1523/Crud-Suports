@@ -25,8 +25,14 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
+                <a href="{{route('dashboard')}}">
+                    <x-secondary-button>
+                        {{__('Voltar') }}
+                    </x-secondary-button>
+                </a>
+                &nbsp &nbsp &nbsp &nbsp &nbsp 
                 <x-button>
-                    {{ __('Link para redefinição de senha de e-mail') }}
+                    {{ __('Redefinir a senha por email') }}
                 </x-button>
             </div>
         </form>
