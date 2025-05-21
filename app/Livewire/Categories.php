@@ -5,7 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Category\Category;
 
-class CategoriesPage extends Component 
+class Categories extends Component 
 {
     public $id;
     public Category $category;

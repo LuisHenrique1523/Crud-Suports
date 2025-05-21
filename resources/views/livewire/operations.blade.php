@@ -61,6 +61,7 @@
                                             </a>
                                         </td>
                                     </tr>
+                                    <input type="hidden" name="ticket_id" value="{{ $ticket }}">
                             @endforeach
                             @else
                             <tr>

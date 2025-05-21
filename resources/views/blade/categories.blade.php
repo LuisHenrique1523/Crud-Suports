@@ -5,6 +5,6 @@
         </h2>
     </x-slot>
 
-    <livewire-categories-page />
+    <livewire-categories />
 
 </x-app-layout>
