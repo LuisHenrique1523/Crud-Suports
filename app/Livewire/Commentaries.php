@@ -53,7 +53,7 @@ class Commentaries extends Component
         $comment = Commentary::find($this->id);
         if (!$comment) {
             session()->flash('error', 'Comentário não encontrado.');
-            return;
+            return redirect()->route('commentaries',[$comment->ticket_id]);
         }
 
         $comment->content = $this->content;

@@ -16,18 +16,13 @@
                     </div>
                 </h2>
                 <div class="col-15">
-                    @session('error')
-                        <div class="alert alert-warning">
-                            {{$value}}
+                    @if(session('error') || session('success'))
+                        <div class="alert {{ session('error') ? 'alert-warning' : 'alert-danger' }}">
+                            {{ session('error') ?? session('success') }}
                         </div>
-                    @endsession
-                    @session('success')
-                        <div class="alert alert-danger">
-                            {{$value}}
-                        </div>
-                    @endsession
+                    @endif
                 </div>
-                <div style="text-align:center; table-layout:auto; width:300%; margin-bottom:0px;">
+                <div style="text-align:center; table-layout:auto; width:333%; margin-bottom:0px;">
                     <table style="margin-bottom:0px; width:30%;" class="table">
                         <thead> 
                             <tr>
@@ -61,18 +56,18 @@
                                             </a>
                                         </td>
                                     </tr>
-                                    <input type="hidden" name="ticket_id" value="{{ $ticket }}">
-                            @endforeach
+                                @endforeach
                             @else
-                            <tr>
-                                <td colspan="9">Nenhuma Operação Registrada</td>
-                            </tr>
+                                <tr>
+                                    <td colspan="9">Nenhuma Operação Registrada</td>
+                                </tr>
                             @endif
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+
         <x-dialog-modal wire:model="confirmingOperationAdd">
 
             <x-slot name="title">
@@ -124,5 +119,6 @@
             </x-slot>
             
         </x-dialog-modal>
+        
     </div>
 </div>

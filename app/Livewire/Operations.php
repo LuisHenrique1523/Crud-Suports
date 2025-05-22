@@ -54,7 +54,7 @@ class Operations extends Component
         $operation = Operation::find($this->id);
         if (!$operation) {
             session()->flash('error', 'Operação não encontrada.');
-            return;
+            return redirect()->route('operations',[$operation->ticket_id]);
         }
 
         $operation->description = $this->description;

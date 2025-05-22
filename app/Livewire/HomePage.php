@@ -16,7 +16,6 @@ class HomePage extends Component
     public $description;
     public $categories;
     public $category_id;
-    public Ticket $tickets;
     public $priority;
     public $confirmingTicketAdd = false;
     public $confirmingTicketEdit = false;
@@ -85,7 +84,7 @@ class HomePage extends Component
         $ticket = Ticket::find($this->id);
         if (!$ticket) {
             session()->flash('error', 'Ticket não encontrado.');
-            return;
+            return redirect()->route('dashboard');
         }
 
         $ticket->subject = $this->subject;
@@ -124,7 +123,7 @@ class HomePage extends Component
     public function render(Ticket $tickets)
     {
         $supports = auth()->user()->tickets()->orderBy('priority')->get();
-        $adm_tickets = $tickets->orderBy('priority')->paginate(10);
+        $adm_tickets = $tickets->orderBy('priority')->paginate(5);
         $showtickets = $this->pc;
 
         return view('livewire.home-page',[

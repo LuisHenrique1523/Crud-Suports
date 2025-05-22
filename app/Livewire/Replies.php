@@ -55,7 +55,7 @@ class Replies extends Component
         $reply = Reply::find($this->id);
         if (!$reply) {
             session()->flash('error', 'Categoria não encontrada.');
-            return;
+            return redirect()->route('replies',[$this->reply_id]);
         }
 
         $reply->reply = $this->reply;

@@ -54,7 +54,7 @@ class Categories extends Component
         $category = Category::find($this->id);
         if (!$category) {
             session()->flash('error', 'Categoria não encontrada.');
-            return;
+            return redirect()->route('categories');
         }
 
         $category->name = $this->name;

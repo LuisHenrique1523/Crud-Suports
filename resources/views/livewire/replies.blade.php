@@ -20,29 +20,24 @@
                     </div>
                 </h2>
                 <div class="col-15">
-                    @session('error')
-                        <div class="alert alert-warning">
-                            {{$value}}
+                    @if(session('error') || session('success'))
+                        <div class="alert {{ session('error') ? 'alert-warning' : 'alert-danger' }}">
+                            {{ session('error') ?? session('success') }}
                         </div>
-                    @endsession
-                    @session('success')
-                        <div class="alert alert-danger">
-                            {{$value}}
-                        </div>
-                    @endsession
+                    @endif
                 </div>
-                <div style="text-align:center; table-layout:auto; width:300%; margin-bottom:0px;">
+                <div style="text-align:center; table-layout:auto; width:333%; margin-bottom:0px;">
                     <table style="margin-bottom:0px; width:30%;" class="table">
                         <thead> 
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Usuário</th>
-                            <th scope="col">Ticket</th>
-                            <th scope="col">Resposta</th>
-                            @role('admin')
-                                <th colspan="2">Ações</th>
-                            @endrole
-                        </tr>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Usuário</th>
+                                <th scope="col">Ticket</th>
+                                <th scope="col">Resposta</th>
+                                @role('admin')
+                                    <th colspan="2">Ações</th>
+                                @endrole
+                            </tr>
                         </thead>
                         <tbody>
                             @if ($replies->count() > 0)
@@ -80,6 +75,7 @@
                 </div>
             </div>
         </div>
+
         <x-dialog-modal wire:model="confirmingReplyAdd">
 
             <x-slot name="title">
@@ -105,6 +101,7 @@
             </x-slot>
 
         </x-dialog-modal>
+
         <x-dialog-modal wire:model="confirmingReplyEdit">
 
             <x-slot name="title">
@@ -130,5 +127,6 @@
             </x-slot>
 
         </x-dialog-modal>
+        
     </div>
 </div>
