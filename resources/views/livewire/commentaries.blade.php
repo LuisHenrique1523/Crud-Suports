@@ -5,7 +5,7 @@
                 <h2 class="font-semibold fs-1 text-xl text-gray-800 leading-tight flex justify-between">
                     {{ __('Comentários') }}
                     <div class="mr-2">
-                        <a href="{{ route('dashboard')}}">
+                        <a href="{{ route('home')}}">
                             <x-secondary-button  wire:loading.attr="disabled">
                                 {{ __('Cancelar') }}
                             </x-secondary-button>

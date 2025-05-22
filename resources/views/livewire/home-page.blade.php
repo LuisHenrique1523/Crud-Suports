@@ -31,9 +31,9 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Usuário</th>
                                     <th scope="col">Email</th>
-                                    <th scope="col">Categoria</th>
                                     <th scope="col">Assunto</th>
                                     <th scope="col">Descrição</th>
+                                    <th scope="col">Categoria</th>
                                     <th scope="col">Prioridade</th>
                                     <th scope="col">Status</th>
                                     <th colspan="5">Ação</th>
@@ -47,9 +47,9 @@
                                                 <td>{{$support->id}}</td>
                                                 <td>{{$support->user->name }}</td>
                                                 <td>{{$support->user->email}}</td>
-                                                <td style="color: {{$support->category->color}}">{{$support->category->name}}</td>
-                                                <td>{{$support->subject}}</td>                                  
+                                                <td>{{$support->subject}}</td>
                                                 <td>{{$support->description}}</td>
+                                                <td style="color: {{$support->category->color}}">{{$support->category->name}}</td>
                                                 <td>
                                                     <span class="bg-{{$support->priority->color()}}-400 px-2 rounded">
                                                         {{$support->priority->change()}}
@@ -105,9 +105,9 @@
                                                 <td>{{$ticket->id}}</td>
                                                 <td>{{$ticket->user->name }}</td>
                                                 <td>{{$ticket->user->email}}</td>
-                                                <td style="color: {{$ticket->category->color}}">{{$ticket->category->name}}</td>
                                                 <td>{{$ticket->subject}}</td>                                  
                                                 <td>{{$ticket->description}}</td>
+                                                <td style="color: {{$ticket->category->color}}">{{$ticket->category->name}}</td>
                                                 <td>
                                                     <span class="bg-{{$ticket->priority->color()}}-400 px-2 rounded">
                                                         {{$ticket->priority->change()}}
@@ -166,7 +166,9 @@
                             </tbody>
                         </table>
                     </div>
-                {{ $adm_tickets->links() }}
+                @role('admin')
+                    {{ $adm_tickets->links() }}
+                @endrole
             </div>
         </div>
         <x-dialog-modal wire:model="confirmingTicketAdd">

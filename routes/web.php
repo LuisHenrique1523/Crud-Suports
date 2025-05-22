@@ -7,13 +7,11 @@ Route::get('/',function ()
     return view('auth.login');
 } );
 Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
+    'authLogin'
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('blade.dashboard');
-    })->name('dashboard');
+    Route::get('/home', function () {
+        return view('blade.home');
+    })->name('home');
     
     Route::get('/categories', function () {
         return view('blade.categories');

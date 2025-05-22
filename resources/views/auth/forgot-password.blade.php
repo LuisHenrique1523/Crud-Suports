@@ -25,7 +25,7 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <a href="{{route('dashboard')}}">
+                <a href="{{route('home')}}">
                     <x-secondary-button>
                         {{__('Voltar') }}
                     </x-secondary-button>

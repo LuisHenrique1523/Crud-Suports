@@ -17,12 +17,12 @@ class TicketFactory extends Factory
     public function definition(): array
     {
         return [
-            'subject' => 'assunto',
-            'description' => 'descrição',
+            'subject' => 'Assunto',
+            'description' => 'Descrição',
             'priority' => '0',
             'status' => '1',
-            'user_id' => '23',
-            'category_id' => '14',
+            'user_id' => '2',
+            'category_id' => '1',
         ];
     }
 }

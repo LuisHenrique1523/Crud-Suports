@@ -44,7 +44,6 @@
                     {{ __('Cancelar') }}
                 </x-secondary-button>
 
-                {{-- <livewire:delete-user :id="auth()->user()->id" > --}}
                 <x-danger-button class="ms-3" wire:click="deleteUser" >
                     {{ __('Deletar Conta') }}
                 </x-danger-button>

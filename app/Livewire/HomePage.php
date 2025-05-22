@@ -44,7 +44,7 @@ class HomePage extends Component
             }
             $ticket->save();
         }
-        return redirect()->route('dashboard');
+        return redirect()->route('home');
     }
     public function confirmTicketAdd()
     {
@@ -65,7 +65,7 @@ class HomePage extends Component
         
         $ticket->save();
 
-        return redirect()->route('dashboard');
+        return redirect()->route('home');
     }
     public function confirmTicketEdit(Ticket $ticket)
     {
@@ -84,7 +84,7 @@ class HomePage extends Component
         $ticket = Ticket::find($this->id);
         if (!$ticket) {
             session()->flash('error', 'Ticket não encontrado.');
-            return redirect()->route('dashboard');
+            return redirect()->route('home');
         }
 
         $ticket->subject = $this->subject;
@@ -93,7 +93,7 @@ class HomePage extends Component
         $ticket->priority = $this->priority;
         $ticket->save();
 
-        return redirect()->route('dashboard');
+        return redirect()->route('home');
     }
 
     public function confirmTicketShow(Ticket $support)
@@ -114,7 +114,7 @@ class HomePage extends Component
         }
 
         $this ->dispatch('refresh');
-        return redirect('/dashboard');
+        return redirect()->route('home');
     }
     public function confirmCommentsAdd()
     {
