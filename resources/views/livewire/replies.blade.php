@@ -10,13 +10,13 @@
                                 {{ __('Cancelar') }}
                             </x-secondary-button>
                         </a>
-                        @role('admin')
+                        @can('create-reply')
                             @if ($ticket == 1)
                                 <x-button wire:click="confirmReplyAdd" style="background: blue">
                                     Nova Resposta
                                 </x-button>
                             @endif
-                        @endrole
+                        @endcan
                     </div>
                 </h2>
                 <div class="col-15">
@@ -34,9 +34,9 @@
                                 <th scope="col">Usuário</th>
                                 <th scope="col">Ticket</th>
                                 <th scope="col">Resposta</th>
-                                @role('admin')
+                                @can('reply-operations')
                                     <th colspan="2">Ações</th>
-                                @endrole
+                                @endcan
                             </tr>
                         </thead>
                         <tbody>
@@ -47,7 +47,7 @@
                                         <td>{{$reply->user->name}}</td>
                                         <td>{{$reply->ticket->subject}}</td>
                                         <td>{{$reply->reply}}</td>
-                                        @role('admin')
+                                        @can('reply-operations')
                                             <td>
                                                 <button wire:click="confirmReplyEdit( {{ $reply->id}})" wire:loading.attr="disabled">
                                                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -62,7 +62,7 @@
                                                     </svg>                                                  
                                                 </a>
                                             </td>
-                                        @endrole
+                                        @endcan
                                    </tr>
                                 @endforeach
                             @else

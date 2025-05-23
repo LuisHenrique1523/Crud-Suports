@@ -122,7 +122,7 @@ class HomePage extends Component
     }
     public function render(Ticket $tickets)
     {
-        $supports = auth()->user()->tickets()->orderBy('priority')->get();
+        $supports = auth()->user()->tickets()->orderBy('priority')->paginate(5);
         $adm_tickets = $tickets->orderBy('priority')->paginate(5);
         $showtickets = $this->pc;
 

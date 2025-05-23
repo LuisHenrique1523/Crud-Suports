@@ -5,11 +5,11 @@
                 <h2 class="font-semibold fs-1 text-xl text-gray-800 leading-tight flex justify-between">
                     {{ __('Suportes') }}
                     <div class="mr-2">
-                        @role('user')
+                        @can('create-ticket')
                             <x-button wire:click="confirmTicketAdd" style="background: blue">
                                 Novo Ticket
                             </x-button>
-                        @endrole
+                        @endcan
                     </div>
                 </h2>
                 <div class="col-15">
@@ -97,8 +97,9 @@
                                             <td colspan="9">Nenhum Ticket Registrado</td>
                                         </tr>
                                     @endif
+                                    
                                 @endrole
-                                @role('admin')
+                                @can('show-all')
                                     @if ($adm_tickets->count() > 0)
                                         @foreach ($adm_tickets as $ticket)
                                             <tr>
@@ -162,12 +163,15 @@
                                             <td colspan="9">Nenhum Ticket Registrado</td>
                                         </tr>
                                     @endif
-                                @endrole
+                                @endcan
                             </tbody>
                         </table>
                     </div>
-                @role('admin')
+                @can('pagination')
                     {{ $adm_tickets->links() }}
+                @endcan
+                @role('user')
+                    {{ $supports->links() }}
                 @endrole
             </div>
         </div>
@@ -226,7 +230,7 @@
             </x-slot>
 
             <x-slot name="content">
-                @role('user')
+                @can('edit-ticket')
                     <div class="col-span-6 sm:col-span-4">
                         <x-label for="subject" value="{{__('Assunto')}}" />
                         <x-input id="subject" type="text" class="mt-1 block w-full" wire:model.defer="subject" />
@@ -247,8 +251,8 @@
                         </select>
                         <x-input-error for="category_id" class="mt-2"/>
                     </div>
-                @endrole
-                @role('admin')
+                @endcan
+                @can('edit-ticket-priority')
                     <div class="col-span-6 sm:col-span-4">
                         <x-label for="priority" value="{{__('Prioridade')}}" />
                         <input type="radio" wire:model="priority" id="small-input" name="High" value="0"> Alta <br>
@@ -256,7 +260,7 @@
                         <input type="radio" wire:model="priority" id="small-input" name="Low" value="2"> Baixa <br>
                         <x-input-error for="priority" class="mt-2"/>
                     </div>
-                @endrole
+                @endcan
             </x-slot>
 
             <x-slot name="footer">
@@ -292,18 +296,18 @@
                 </x-slot>
 
                 <x-slot name="footer">
-                    @role('admin')
+                    @can('finish-ticket')
                         <x-secondary-button wire:click="status( {{$showticket->id}})">
                             {{ $showticket->status ? 'Finalizar' : 'Abrir' }}
                         </x-secondary-button>
-                    @endrole
-                    @role('user')
+                    @endcan
+                    @can('delete-ticket')
                         @if ($showticket->status == 0)
                             <x-secondary-button wire:click="confirmTicketDeletion( {{$showticket->id}})" wire:loading.attr="disabled">
                                 Deletar
                             </x-secondary-button>
                         @endif
-                    @endrole
+                    @endcan
                     <x-secondary-button wire:click="$set('confirmingTicketShow',false)" wire:loading.attr="disabled">
                         {{ __('Fechar') }}
                     </x-secondary-button>

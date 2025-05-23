@@ -7,7 +7,7 @@ Route::get('/',function ()
     return view('auth.login');
 } );
 Route::middleware([
-    'authLogin'
+    'auth',
 ])->group(function () {
     Route::get('/home', function () {
         return view('blade.home');
@@ -26,10 +26,8 @@ Route::middleware([
     })->name('replies');
 });
 
-Route::middleware([
-    'isAdmin',
-])->group(function () {
+Route::group(['middleware' => ['can:access-operations']], function () {
     Route::get('/operations/ticket/{ticket}', function () {
         return view('blade.operations');
     })->name('operations');
-});
+})->middleware('auth');

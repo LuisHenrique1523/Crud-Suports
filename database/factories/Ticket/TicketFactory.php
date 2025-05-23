@@ -19,10 +19,10 @@ class TicketFactory extends Factory
         return [
             'subject' => 'Assunto',
             'description' => 'Descrição',
-            'priority' => '0',
+            'priority' => '2',
             'status' => '1',
-            'user_id' => '2',
-            'category_id' => '1',
+            'user_id' => '4',
+            'category_id' => '2',
         ];
     }
 }

@@ -21,24 +21,30 @@ class RolePermissionSeeder extends Seeder
             'edit-ticket-priority',
             'finish-ticket',
             'delete-ticket',
-            'delete-comment',
+            'comment-action',
             'delete-user-comment',
             'edit-user-comment',
+            'access-operations',
+            'pagination',
+            'reply-operations'
         ];
         
         foreach ($permissions as $permission) {
             Permission::firstOrCreate(['name' => $permission]);
         }
-        
-        $adminRole = Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'web']);
+        $superadminRole = Role::firstOrCreate(['name' => 'superadmin', 'guard_name' => 'web']);
+        $operatorRole = Role::firstOrCreate(['name' => 'operator', 'guard_name' => 'web']);
         $userRole = Role::firstOrCreate(['name' => 'user', 'guard_name' => 'web']);
 
-        $adminRole->syncPermissions([
+        $operatorRole->syncPermissions([
             'show-all',
             'create-reply',
             'edit-ticket-priority',
             'finish-ticket',
-            'delete-comment',
+            'comment-action',
+            'access-operations', 
+            'pagination',
+            'reply-operations',
         ]);
     
         $userRole->syncPermissions([
@@ -50,13 +56,21 @@ class RolePermissionSeeder extends Seeder
             'edit-user-comment',
         ]);
 
-        $admin = User::create([
-            'name' => 'Admin',
-            'email' => 'admin@gmail.com',
+        $superadmin = User::create([
+            'name' => 'SuperAdmin',
+            'email' => 'superadmin@gmail.com',
             'password' => Hash::make('admin001'),
+            'role_as' => '2',
+        ]);
+        $superadmin->assignRole($superadminRole);
+
+        $operator = User::create([
+            'name' => 'Operator',
+            'email' => 'operator@gmail.com',
+            'password' => Hash::make('operator'),
             'role_as' => '1',
         ]);
-        $admin->assignRole($adminRole);
+        $operator->assignRole($operatorRole);
 
         $user = User::create([
             'name' => 'user',

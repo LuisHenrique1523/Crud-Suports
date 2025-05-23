@@ -20,13 +20,30 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input)
     {
+        $permissions = [
+            'show-user',
+            'create-ticket',
+            'edit-ticket',
+            'delete-ticket',
+            'delete-user-comment',
+            'edit-user-comment',
+        ];
+
         $userRole = Role::firstOrCreate(['name' => 'user', 'guard_name' => 'web']);
+
+        $userRole->syncPermissions([
+            'show-user',
+            'create-ticket',
+            'edit-ticket',
+            'delete-ticket',
+            'delete-user-comment',
+            'edit-user-comment',
+        ]);
 
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
-            'isAdmin' => ['nullable', 'boolean'],
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();
 
@@ -34,7 +51,6 @@ class CreateNewUser implements CreatesNewUsers
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
-            'isAdmin' => isset($input['isAdmin']) && $input['isAdmin'] ? 1 : 0,
         ]);
         $user->assignRole($userRole);
         
