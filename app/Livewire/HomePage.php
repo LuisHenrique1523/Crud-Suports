@@ -17,6 +17,7 @@ class HomePage extends Component
     public $categories;
     public $category_id;
     public $priority;
+    public Ticket $ticket;
     public $confirmingTicketAdd = false;
     public $confirmingTicketEdit = false;
     public $confirmingTicketShow = false;
@@ -99,26 +100,29 @@ class HomePage extends Component
     public function confirmTicketShow(Ticket $support)
     {
         $this->pc = $support;
-        $showtickets = Ticket::where('id',$support)->first();
 
         $this->confirmingTicketShow = true;
     }
-    public function confirmTicketDeletion( Ticket $ticket)
+    public function confirmTicketDeletion(Ticket $ticket)
     {
         try{
-            if($ticket->delete()){
-                session()->flash('success', 'Ticket deletado com sucesso!');
+            if ($this->authorize('delete-ticket',$ticket))
+            {
+                try{
+                    if($ticket->delete()){
+                        session()->flash('success', 'Ticket deletado com sucesso!');
+                    }
+                }catch(\Exception $e){
+                    session()->flash('error', 'Não é possível deletar um ticket em uso!');
+                }
+
+                $this->dispatch('refresh');
+                return redirect()->route('home');
             }
         }catch(\Exception $e){
-            session()->flash('error', 'Não é possível deletar um ticket em uso!');
+            session()->flash('error', 'Permissão necessária para realizar essa ação!');
         }
-
-        $this ->dispatch('refresh');
-        return redirect()->route('home');
-    }
-    public function confirmCommentsAdd()
-    {
-        return redirect(route('comments'));
+        $this->confirmingTicketShow = false;
     }
     public function render(Ticket $tickets)
     {

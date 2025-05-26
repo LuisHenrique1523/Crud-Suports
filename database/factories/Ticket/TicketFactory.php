@@ -21,8 +21,8 @@ class TicketFactory extends Factory
             'description' => 'Descrição',
             'priority' => '2',
             'status' => '1',
-            'user_id' => '4',
-            'category_id' => '2',
+            'user_id' => '3',
+            'category_id' => '1',
         ];
     }
 }

@@ -12,12 +12,10 @@ class TicketPolicy
         if ($user->hasRole('superadmin')) {
             return true;
         }
- 
     return null;
     }
-
-    public function __construct()
+    public function delete(User $user, Ticket $ticket): bool
     {
-        
+        return $user->id === $ticket->user_id;
     }
 }

@@ -14,27 +14,28 @@ class RolePermissionSeeder extends Seeder
     {
         $permissions = [
             'show-all',
-            'show-user',
             'create-ticket',
-            'create-reply',
             'edit-ticket',
             'edit-ticket-priority',
             'finish-ticket',
             'delete-ticket',
+            'create-reply',
+            'pagination',
+            
             'comment-action',
             'delete-user-comment',
             'edit-user-comment',
+
             'access-operations',
-            'pagination',
-            'reply-operations'
+            'reply-operations',
         ];
         
         foreach ($permissions as $permission) {
             Permission::firstOrCreate(['name' => $permission]);
         }
-        $superadminRole = Role::firstOrCreate(['name' => 'superadmin', 'guard_name' => 'web']);
-        $operatorRole = Role::firstOrCreate(['name' => 'operator', 'guard_name' => 'web']);
-        $userRole = Role::firstOrCreate(['name' => 'user', 'guard_name' => 'web']);
+        $superadminRole = Role::firstOrCreate(['name' => 'superadmin']);
+        $operatorRole = Role::firstOrCreate(['name' => 'operator']);
+        $userRole = Role::firstOrCreate(['name' => 'user']);
 
         $operatorRole->syncPermissions([
             'show-all',
@@ -48,7 +49,6 @@ class RolePermissionSeeder extends Seeder
         ]);
     
         $userRole->syncPermissions([
-            'show-user',
             'create-ticket',
             'edit-ticket',
             'delete-ticket',

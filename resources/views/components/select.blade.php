@@ -11,7 +11,7 @@
         <option value="#2E7044">Verde</option>
         <option value="#F15BB5">Rosa</option>
         <option value="#9B5DE5">Roxo</option>
-        <option value="#FEE440">Amarelo Neon</option>
+        <option value="#696969">Cinza</option>
     </select>
 
     <div id="preview"></div>

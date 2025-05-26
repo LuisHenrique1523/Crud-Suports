@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        Ticket::factory(3)->create();
+        Ticket::factory(5)->create();
 
         // $this->call(RolePermissionSeeder::class);
     }
