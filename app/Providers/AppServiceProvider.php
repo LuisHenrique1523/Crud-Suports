@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Reply;
+use App\Models\User;
+use App\Policies\ReplyPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 

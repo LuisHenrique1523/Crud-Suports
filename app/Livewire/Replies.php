@@ -67,16 +67,20 @@ class Replies extends Component
     public function confirmReplyDeletion( Reply $reply)
     {
         try{
-            if($reply->delete()){
-                session()->flash('success', 'Resposta deletada com sucesso!');
-            }
-        }catch(\Exception $e){
-            session()->flash('error', 'Não foi possível deletar esta resposta!');
-        }
+            $this->authorize('delete',$reply);
+                try{
+                    if($reply->delete()){
+                        session()->flash('success', 'Resposta deletada com sucesso!');
+                    }
+                }catch(\Exception $e){
+                    session()->flash('error', 'Não foi possível deletar esta resposta!');
+                }
 
-        $this ->dispatch('refresh');
-        $this->dispatch('ReplyDeleted');
-        return redirect()->route('replies',[$this->reply_id]);
+                $this->dispatch('ReplyDeleted');
+                return redirect()->route('replies',[$this->reply_id]);
+        }catch(\Exception $e){
+            session()->flash('error', 'Permissão necessária para realizar essa ação!');
+        }
     }
     public function render( Reply $reply)
     {   

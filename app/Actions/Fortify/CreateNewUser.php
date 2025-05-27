@@ -32,11 +32,10 @@ class CreateNewUser implements CreatesNewUsers
         $userRole = Role::firstOrCreate(['name' => 'user', 'guard_name' => 'web']);
 
         $userRole->syncPermissions([
-            'show-user',
             'create-ticket',
             'edit-ticket',
             'delete-ticket',
-            'delete-user-comment',
+            'deletecomment',
             'edit-user-comment',
         ]);
 

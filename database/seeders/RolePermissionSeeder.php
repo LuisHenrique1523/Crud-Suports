@@ -21,9 +21,8 @@ class RolePermissionSeeder extends Seeder
             'delete-ticket',
             'create-reply',
             'pagination',
-            
+
             'comment-action',
-            'delete-user-comment',
             'edit-user-comment',
 
             'access-operations',
@@ -33,6 +32,7 @@ class RolePermissionSeeder extends Seeder
         foreach ($permissions as $permission) {
             Permission::firstOrCreate(['name' => $permission]);
         }
+
         $superadminRole = Role::firstOrCreate(['name' => 'superadmin']);
         $operatorRole = Role::firstOrCreate(['name' => 'operator']);
         $userRole = Role::firstOrCreate(['name' => 'user']);
@@ -47,34 +47,36 @@ class RolePermissionSeeder extends Seeder
             'pagination',
             'reply-operations',
         ]);
-    
+
         $userRole->syncPermissions([
             'create-ticket',
             'edit-ticket',
             'delete-ticket',
-            'delete-user-comment',
             'edit-user-comment',
         ]);
 
-        $superadmin = User::create([
+        $superadmin = User::firstOrCreate([
+            'email' => 'superadmin@gmail.com'
+        ], [
             'name' => 'SuperAdmin',
-            'email' => 'superadmin@gmail.com',
             'password' => Hash::make('admin001'),
             'role_as' => '2',
         ]);
         $superadmin->assignRole($superadminRole);
 
-        $operator = User::create([
+        $operator = User::firstOrCreate([
+            'email' => 'operator@gmail.com'
+        ], [
             'name' => 'Operator',
-            'email' => 'operator@gmail.com',
             'password' => Hash::make('operator'),
             'role_as' => '1',
         ]);
         $operator->assignRole($operatorRole);
 
-        $user = User::create([
-            'name' => 'user',
-            'email' => 'user@gmail.com',
+        $user = User::firstOrCreate([
+            'email' => 'user@gmail.com'
+        ], [
+            'name' => 'User',
             'password' => Hash::make('12345678'),
             'role_as' => '0',
         ]);

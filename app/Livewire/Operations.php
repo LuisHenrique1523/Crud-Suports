@@ -67,16 +67,20 @@ class Operations extends Component
     public function confirmOperationDeletion( Operation $operation)
     {
         try{
-            if($operation->delete()){
-                session()->flash('success', 'Operação deletada com sucesso!');
-            }
-        }catch(\Exception $e){
-            session()->flash('error', 'Não foi possível deletar a operação em uso!');
-        }
+            $this->authorize('delete',$operation);
+                try{
+                    if($operation->delete()){
+                        session()->flash('success', 'Operação deletada com sucesso!');
+                    }
+                }catch(\Exception $e){
+                    session()->flash('error', 'Não foi possível deletar a operação em uso!');
+                }
 
-        $this ->dispatch('refresh');
-        $this->dispatch('CommentDeleted');
-        return redirect()->route('operations',[$operation->ticket_id]);
+                $this->dispatch('CommentDeleted');
+                return redirect()->route('operations',[$operation->ticket_id]);
+        }Catch(\Exception $e){
+        session()->flash('error', 'Permissão necessária para realizar essa ação!');
+        }
     }
     public function render()
     {

@@ -3,10 +3,12 @@
 namespace App\Livewire;
 
 use App\Models\Comemntary\Commentary;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
 class Commentaries extends Component
 {
+    use AuthorizesRequests;
     public $ticket = [];
     public $id;
     public $content;
@@ -63,19 +65,23 @@ class Commentaries extends Component
 
         return redirect()->route('commentaries',[$comment->ticket_id]);
     }
-    public function confirmCommentDeletion( Commentary $commentary)
+    public function confirmCommentDeletion(Commentary $comment)
     {
         try{
-            if($commentary->delete()){
-                session()->flash('success', 'Comentário deletado com sucesso!');
-            }
-        }catch(\Exception $e){
-            session()->flash('error', 'Não foi possível deletar este comentário!');
-        }
+            $this->authorize('delete',$comment);
+                try{
+                    if($comment->delete()){
+                        session()->flash('success', 'Comentário deletado com sucesso!');
+                    }
+                }catch(\Exception $e){
+                    session()->flash('error', 'Não foi possível deletar este comentário!');
+                }
 
-        $this ->dispatch('refresh');
-        $this->dispatch('CommentDeleted');
-        return redirect()->route('commentaries',[$commentary->ticket_id]);
+                $this->dispatch('CommentDeleted');
+                return redirect()->route('commentaries',[$comment->ticket_id]);
+        }Catch(\Exception $e){
+            session()->flash('error', 'Permissão necessária para realizar essa ação!');
+        }
     }
     public function render(Commentary $comment)
     {

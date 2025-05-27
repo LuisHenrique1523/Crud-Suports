@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Commentary extends Model
 {
     protected $table = 'commentaries';
-    protected $fillable = ['content'];
+    protected $fillable = ['content','user_id'];
     public function user()
     {
         return $this->belongsTo(User::class);
