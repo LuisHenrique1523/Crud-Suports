@@ -35,7 +35,6 @@ class CreateNewUser implements CreatesNewUsers
             'create-ticket',
             'edit-ticket',
             'delete-ticket',
-            'deletecomment',
             'edit-user-comment',
         ]);
 

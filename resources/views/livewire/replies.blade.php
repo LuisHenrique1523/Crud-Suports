@@ -34,7 +34,9 @@
                                 <th scope="col">Usuário</th>
                                 <th scope="col">Ticket</th>
                                 <th scope="col">Resposta</th>
-                                <th colspan="2">Ações</th>
+                                @can('operations')
+                                    <th colspan="2">Ações</th>
+                                @endcan
                             </tr>
                         </thead>
                         <tbody>
