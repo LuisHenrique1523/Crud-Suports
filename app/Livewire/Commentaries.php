@@ -52,8 +52,6 @@ class Commentaries extends Component
     {
         $this->validate();
 
-        try{
-            $this->authorize('edit',$comment);
                 $comment = Commentary::find($this->id);
                 if (!$comment) {
                     session()->flash('error', 'Comentário não encontrado.');
@@ -66,9 +64,6 @@ class Commentaries extends Component
                 $comment->save();
 
                 return redirect()->route('commentaries',[$comment->ticket_id]);
-            }catch(AuthorizationException $e){
-            session()->flash('error', 'Permissão necessária para realizar essa ação!');
-            }
     }
     public function confirmCommentDeletion( Commentary $comment)
     {

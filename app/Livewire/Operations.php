@@ -52,8 +52,6 @@ class Operations extends Component
     {
         $this->validate();
 
-        try{
-            $this->authorize('edit',$operation);
                 $operation = Operation::find($this->id);
                 if (!$operation) {
                     session()->flash('error', 'Operação não encontrada.');
@@ -66,9 +64,6 @@ class Operations extends Component
                 $operation->save();
 
                 return redirect()->route('operations',[$operation->ticket_id]);
-            }catch(AuthorizationException $e){
-                session()->flash('error', 'Permissão necessária para realizar essa ação!');
-            }
     }
     public function confirmOperationDeletion( Operation $operation)
     {

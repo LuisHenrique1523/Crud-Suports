@@ -53,21 +53,16 @@ class Replies extends Component
     {
         $this->validate();
 
-        try{
-            $this->authorize('edit',$reply);
-                $reply = Reply::find($this->id);
-                if (!$reply) {
-                    session()->flash('error', 'Categoria não encontrada.');
-                    return redirect()->route('replies',[$this->reply_id]);
-                }
+        $reply = Reply::find($this->id);
+        if (!$reply) {
+            session()->flash('error', 'Categoria não encontrada.');
+            return redirect()->route('replies',[$this->reply_id]);
+        }
 
-                $reply->reply = $this->reply;
-                $reply->save();
+        $reply->reply = $this->reply;
+        $reply->save();
 
-                return redirect()->route('replies',[$this->reply_id]);
-            }catch(AuthorizationException $e){
-                session()->flash('error', 'Permissão necessária para realizar essa ação!');
-            }
+        return redirect()->route('replies',[$this->reply_id]);
     }
     public function confirmReplyDeletion( Reply $reply)
     {
