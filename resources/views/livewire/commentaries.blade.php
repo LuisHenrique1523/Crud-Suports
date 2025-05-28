@@ -30,7 +30,7 @@
                                 <th scope="col">Usuário</th>
                                 <th scope="col">Ticket</th>
                                 <th scope="col">Conteúdo</th>
-                                <th colspan="2">Ação</th>
+                                <th colspan="2">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,6 +41,7 @@
                                         <td>{{$comment->user->name}}</td>
                                         <td>{{$comment->ticket->subject}}</td>
                                         <td>{{$comment->content}}</td>
+                                        @can('edit',$comment)
                                         <td>
                                             <button wire:click="confirmCommentEdit( {{$comment->id}} )" wire:loading.attr="disabled" title="Editar">
                                                 <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -48,7 +49,8 @@
                                                 </svg>
                                             </button>
                                         </td>
-                                        @can('delete', $comment)
+                                        @endcan
+                                        @can('delete',$comment)
                                             <td>
                                                 <a wire:click="confirmCommentDeletion( {{$comment->id}})" wire:loading.attr="disabled" title="Deletar">
                                                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">

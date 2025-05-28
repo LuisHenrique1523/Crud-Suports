@@ -4,7 +4,7 @@ namespace App\Models\Ticket;
 
 use App\Enums\Priority;
 use App\Models\Category\category;
-use App\Models\Comemntary\Commentary;
+use App\Models\Commentary\Commentary;
 use App\Models\Operation\Operation;
 use App\Models\Reply;
 use App\Models\User;

@@ -34,9 +34,7 @@
                                 <th scope="col">Usuário</th>
                                 <th scope="col">Ticket</th>
                                 <th scope="col">Resposta</th>
-                                @can('reply-operations')
-                                    <th colspan="2">Ações</th>
-                                @endcan
+                                <th colspan="2">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -47,7 +45,7 @@
                                         <td>{{$reply->user->name}}</td>
                                         <td>{{$reply->ticket->subject}}</td>
                                         <td>{{$reply->reply}}</td>
-                                        @can('reply-operations')
+                                        @can('edit',$reply)
                                             <td>
                                                 <button wire:click="confirmReplyEdit( {{ $reply->id}})" wire:loading.attr="disabled" title="Editar">
                                                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -55,7 +53,8 @@
                                                     </svg>
                                                 </button> 
                                             </td>
-                                            @can('delete',$reply)
+                                        @endcan
+                                        @can('delete',$reply)
                                             <td>
                                                 <a wire:click="confirmReplyDeletion( {{$reply->id}})" wire:loading.attr="disabled" title="Deletar">
                                                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -63,7 +62,6 @@
                                                     </svg>                                                  
                                                 </a>
                                             </td>
-                                            @endcan
                                         @endcan
                                    </tr>
                                 @endforeach

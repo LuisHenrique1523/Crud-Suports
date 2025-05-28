@@ -5,7 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Enums\Priority;
-use App\Models\Comemntary\Commentary;
+use App\Models\Commentary\Commentary;
 use App\Models\Operation\Operation;
 use App\Models\Ticket\Ticket;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

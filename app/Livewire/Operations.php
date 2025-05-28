@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Operation\Operation;
 use App\Models\Ticket\Ticket;
+use Illuminate\Auth\Access\AuthorizationException;
 use Livewire\Component;
 
 class Operations extends Component
@@ -51,18 +52,23 @@ class Operations extends Component
     {
         $this->validate();
 
-        $operation = Operation::find($this->id);
-        if (!$operation) {
-            session()->flash('error', 'Operação não encontrada.');
-            return redirect()->route('operations',[$operation->ticket_id]);
-        }
+        try{
+            $this->authorize('edit',$operation);
+                $operation = Operation::find($this->id);
+                if (!$operation) {
+                    session()->flash('error', 'Operação não encontrada.');
+                    return redirect()->route('operations',[$operation->ticket_id]);
+                }
 
-        $operation->description = $this->description;
-        $operation->user_id = auth()->user()->id;
-        $operation->ticket_id = $this->ticket;
-        $operation->save();
+                $operation->description = $this->description;
+                $operation->user_id = auth()->user()->id;
+                $operation->ticket_id = $this->ticket;
+                $operation->save();
 
-        return redirect()->route('operations',[$operation->ticket_id]);
+                return redirect()->route('operations',[$operation->ticket_id]);
+            }catch(AuthorizationException $e){
+                session()->flash('error', 'Permissão necessária para realizar essa ação!');
+            }
     }
     public function confirmOperationDeletion( Operation $operation)
     {
@@ -70,16 +76,15 @@ class Operations extends Component
             $this->authorize('delete',$operation);
                 try{
                     if($operation->delete()){
-                        session()->flash('success', 'Operação deletada com sucesso!');
+                        session()->flash('success', 'Resposta deletada com sucesso!');
                     }
                 }catch(\Exception $e){
-                    session()->flash('error', 'Não foi possível deletar a operação em uso!');
+                    session()->flash('error', 'Não foi possível deletar esta resposta!');
                 }
 
-                $this->dispatch('CommentDeleted');
-                return redirect()->route('operations',[$operation->ticket_id]);
-        }Catch(\Exception $e){
-        session()->flash('error', 'Permissão necessária para realizar essa ação!');
+            return redirect()->route('operations',[$operation->ticket_id]);
+        }catch(AuthorizationException $e){
+            session()->flash('error', 'Permissão necessária para realizar essa ação!');
         }
     }
     public function render()

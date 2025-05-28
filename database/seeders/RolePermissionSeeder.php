@@ -22,11 +22,8 @@ class RolePermissionSeeder extends Seeder
             'create-reply',
             'pagination',
 
-            'comment-action',
-            'edit-user-comment',
-
             'access-operations',
-            'reply-operations',
+            'operations',
         ];
         
         foreach ($permissions as $permission) {
@@ -42,17 +39,15 @@ class RolePermissionSeeder extends Seeder
             'create-reply',
             'edit-ticket-priority',
             'finish-ticket',
-            'comment-action',
             'access-operations', 
             'pagination',
-            'reply-operations',
+            'operations',
         ]);
 
         $userRole->syncPermissions([
             'create-ticket',
             'edit-ticket',
             'delete-ticket',
-            'edit-user-comment',
         ]);
 
         $superadmin = User::firstOrCreate([

@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Reply;
 use App\Models\Ticket\Ticket;
+use Illuminate\Auth\Access\AuthorizationException;
 use Livewire\Component;
 
 class Replies extends Component
@@ -52,18 +53,22 @@ class Replies extends Component
     {
         $this->validate();
 
-        $reply = Reply::find($this->id);
-        if (!$reply) {
-            session()->flash('error', 'Categoria não encontrada.');
-            return redirect()->route('replies',[$this->reply_id]);
-        }
+        try{
+            $this->authorize('edit',$reply);
+                $reply = Reply::find($this->id);
+                if (!$reply) {
+                    session()->flash('error', 'Categoria não encontrada.');
+                    return redirect()->route('replies',[$this->reply_id]);
+                }
 
-        $reply->reply = $this->reply;
-        $reply->save();
+                $reply->reply = $this->reply;
+                $reply->save();
 
-        return redirect()->route('replies',[$this->reply_id]);
+                return redirect()->route('replies',[$this->reply_id]);
+            }catch(AuthorizationException $e){
+                session()->flash('error', 'Permissão necessária para realizar essa ação!');
+            }
     }
-
     public function confirmReplyDeletion( Reply $reply)
     {
         try{
@@ -76,9 +81,8 @@ class Replies extends Component
                     session()->flash('error', 'Não foi possível deletar esta resposta!');
                 }
 
-                $this->dispatch('ReplyDeleted');
-                return redirect()->route('replies',[$this->reply_id]);
-        }catch(\Exception $e){
+            return redirect()->route('replies',[$this->reply_id]);
+        }catch(AuthorizationException $e){
             session()->flash('error', 'Permissão necessária para realizar essa ação!');
         }
     }

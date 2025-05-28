@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Reply;
 use App\Models\User;
 use App\Policies\ReplyPolicy;
+use App\Policies\CommentPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 

@@ -14,4 +14,11 @@ class ReplyPolicy
         }
         return $user->hasRole('superadmin');
     }
+    public function edit(User $user, Reply $reply): bool
+    {
+        if ($user->id === $reply->user_id) {
+            return true;
+        }
+        return $user->hasRole('superadmin');
+    }
 }
