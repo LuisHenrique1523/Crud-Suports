@@ -11,11 +11,9 @@
                             </x-secondary-button>
                         </a>
                         @can('create-reply')
-                            @if ($ticket == 1)
-                                <x-button wire:click="confirmReplyAdd" style="background: blue">
-                                    Nova Resposta
-                                </x-button>
-                            @endif
+                            <x-button wire:click="confirmReplyAdd" style="background: blue">
+                                Nova Resposta
+                            </x-button>
                         @endcan
                     </div>
                 </h2>

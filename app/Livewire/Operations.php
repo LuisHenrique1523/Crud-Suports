@@ -12,6 +12,7 @@ class Operations extends Component
     public $ticket = [];
     public $id;
     public $description;
+    public $user_id;
     public $operations;
     public Operation $operation;
     public $confirmingOperationAdd = false; 
@@ -46,6 +47,7 @@ class Operations extends Component
     {  
         $this->id = $operation->id;
         $this->description = $operation->description;
+        $this->user_id = $operation->user_id;
         $this->confirmingOperationEdit = true;
     }
     public function OperationEdit(Operation $operation)
@@ -59,7 +61,7 @@ class Operations extends Component
                 }
 
                 $operation->description = $this->description;
-                $operation->user_id = auth()->user()->id;
+                $operation->user_id = $this->user_id;
                 $operation->ticket_id = $this->ticket;
                 $operation->save();
 

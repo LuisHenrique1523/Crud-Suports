@@ -10,7 +10,7 @@ use Livewire\{Component,WithPagination};
 class HomePage extends Component
 {
     use WithPagination;
-    public $pc;
+    public $ticketdescription;
     public $id;
     public $subject;
     public $description;
@@ -99,7 +99,7 @@ class HomePage extends Component
 
     public function confirmTicketShow(Ticket $support)
     {
-        $this->pc = $support;
+        $this->ticketdescription = $support;
 
         $this->confirmingTicketShow = true;
     }
@@ -128,7 +128,7 @@ class HomePage extends Component
     {
         $supports = auth()->user()->tickets()->orderBy('priority')->paginate(5);
         $adm_tickets = $tickets->orderBy('priority')->paginate(5);
-        $showtickets = $this->pc;
+        $showtickets = $this->ticketdescription;
 
         return view('livewire.home-page',[
             'supports' => $supports,

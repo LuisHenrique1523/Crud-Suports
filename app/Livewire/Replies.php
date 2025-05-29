@@ -21,6 +21,7 @@ class Replies extends Component
     ];
     public function mount()
     {
+        $this->replies = Reply::where('ticket_id', request()->route('ticket'))->get();
         $this->reply_id = request()->route('ticket');
         $this->ticket_user = Ticket::where('id', request()->route('ticket'))->value('user_id');
     }
@@ -83,7 +84,6 @@ class Replies extends Component
     }
     public function render( Reply $reply)
     {   
-        $this->replies = Reply::where('ticket_id', request()->route('ticket'))->get();
         $ticket = Ticket::where('id',request()->route('ticket'))->value('status');
 
         return view('livewire.replies',[

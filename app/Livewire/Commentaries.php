@@ -12,6 +12,7 @@ class Commentaries extends Component
     public $ticket = [];
     public $id;
     public $content;
+    public $user_id;
     public Commentary $comment;
     public $commentaries;
     public $confirmingCommentAdd = false;
@@ -46,6 +47,7 @@ class Commentaries extends Component
     {  
         $this->id = $comment->id;
         $this->content = $comment->content;
+        $this->user_id = $comment->user_id;
         $this->confirmingCommentEdit = true;
     }
     public function CommentEdit(Commentary $comment)
@@ -59,7 +61,7 @@ class Commentaries extends Component
                 }
 
                 $comment->content = $this->content;
-                $comment->user_id = auth()->user()->id;
+                $comment->user_id = $this->user_id;
                 $comment->ticket_id = $this->ticket;
                 $comment->save();
 
@@ -84,7 +86,6 @@ class Commentaries extends Component
     }
     public function render(Commentary $comment)
     {
-        
         $comments = Commentary::where('ticket_id', request()->route('ticket'));
         return view('livewire.commentaries',compact('comments'));
     }
