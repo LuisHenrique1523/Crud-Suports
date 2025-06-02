@@ -36,11 +36,11 @@ class RolePermissionSeeder extends Seeder
 
         $operatorRole->syncPermissions([
             'show-all',
-            'create-reply',
             'edit-ticket-priority',
             'finish-ticket',
-            'access-operations', 
+            'create-reply',
             'pagination',
+            'access-operations', 
             'operations',
         ]);
 

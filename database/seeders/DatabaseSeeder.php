@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category\Category;
 use App\Models\Ticket\Ticket;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -16,7 +17,9 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        Ticket::factory(10)->create();
+        // Ticket::factory(20)->create();
+
+        Category::factory(2)->create();
 
         // $this->call(RolePermissionSeeder::class);
     }

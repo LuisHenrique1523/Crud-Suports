@@ -22,7 +22,7 @@ class TicketFactory extends Factory
             'priority' => '0',
             'status' => '1',
             'user_id' => '3',
-            'category_id' => '1',
+            'category_id' => '2',
         ];
     }
 }

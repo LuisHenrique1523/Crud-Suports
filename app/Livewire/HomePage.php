@@ -94,7 +94,7 @@ class HomePage extends Component
         $ticket->priority = $this->priority;
         $ticket->save();
 
-        return redirect()->route('home');
+        $this->confirmingTicketEdit = false;
     }
 
     public function confirmTicketShow(Ticket $support)
@@ -127,7 +127,7 @@ class HomePage extends Component
     public function render(Ticket $tickets)
     {
         $supports = auth()->user()->tickets()->orderBy('priority')->paginate(5);
-        $adm_tickets = $tickets->orderBy('priority')->paginate(5);
+        $adm_tickets = $tickets->orderBy('priority')->paginate(10);
         $showtickets = $this->ticketdescription;
 
         return view('livewire.home-page',[

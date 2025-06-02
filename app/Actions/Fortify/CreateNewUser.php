@@ -21,12 +21,9 @@ class CreateNewUser implements CreatesNewUsers
     public function create(array $input)
     {
         $permissions = [
-            'show-user',
             'create-ticket',
             'edit-ticket',
             'delete-ticket',
-            'delete-user-comment',
-            'edit-user-comment',
         ];
 
         $userRole = Role::firstOrCreate(['name' => 'user', 'guard_name' => 'web']);
@@ -35,7 +32,6 @@ class CreateNewUser implements CreatesNewUsers
             'create-ticket',
             'edit-ticket',
             'delete-ticket',
-            'edit-user-comment',
         ]);
 
         Validator::make($input, [
