@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Role extends Model
 {
-   //
+   protected $fillable = ['name','guard_name'];
 }

@@ -41,11 +41,23 @@ class Categories extends Component
     }
     public function confirmCategoryEdit(Category $category)
     {
-        $this->id = $category->id;
-        $this->name = $category->name;
-        $this->color = $category->color;
+        try {
+            $categoryInUse = \DB::table('tickets')
+                ->where('category_id', $category->id)
+                ->exists();
 
-        $this->confirmingCategoryEdit = true;
+            if ($categoryInUse) {
+                session()->flash('error', 'Não é possível editar uma categoria em uso!');
+            } else {
+                    $this->id = $category->id;
+                    $this->name = $category->name;
+                    $this->color = $category->color;
+
+                    $this->confirmingCategoryEdit = true;
+            }
+        }catch (\Exception $e) {
+            session()->flash('error', 'Erro!');
+        }
     }
     public function categoryEdit(Category $category)
     {
@@ -56,12 +68,12 @@ class Categories extends Component
             session()->flash('error', 'Categoria não encontrada.');
             return redirect()->route('categories');
         }
-
         $category->name = $this->name;
         $category->color = $this->color;
         $category->save();
-
+        
         return redirect()->route('categories');
+        
     }
     public function confirmCategoryDeletion( Category $category)
     {

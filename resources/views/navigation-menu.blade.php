@@ -18,10 +18,27 @@
                         </x-nav-link>
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link href="{{ route('categories') }}" :active="request()->routeIs('home')">
+                        <x-nav-link href="{{ route('categories') }}" :active="request()->routeIs('categories')">
                             {{ __('Categorias') }}
                         </x-nav-link>
                     </div>
+                    @role('superadmin')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link href="{{ route('users') }}" :active="request()->routeIs('users')">
+                            {{ __('Usuários') }}
+                        </x-nav-link>
+                    </div>
+                        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                            <x-nav-link href="{{ route('roles') }}" :active="request()->routeIs('roles')">
+                                {{ __('Funções') }}
+                            </x-nav-link>
+                        </div>
+                        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                            <x-nav-link href="{{ route('permissions') }}" :active="request()->routeIs('permissions')">
+                                {{ __('Permissões') }}
+                            </x-nav-link>
+                        </div>
+                    @endrole
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">

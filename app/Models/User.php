@@ -82,5 +82,5 @@ class User extends Authenticatable
     public function operations()
     {
         return $this->hasMany(Operation::class);
-    }
+    } 
 }

@@ -17,6 +17,7 @@ class HomePage extends Component
     public $categories;
     public $category_id;
     public $priority;
+    public $status;
     public Ticket $ticket;
     public $confirmingTicketAdd = false;
     public $confirmingTicketEdit = false;
