@@ -13,6 +13,7 @@ class Commentaries extends Component
     public $id;
     public $content;
     public $user_id;
+    public $ticket_id;
     public Commentary $comment;
     public $commentaries;
     public $confirmingCommentAdd = false;
@@ -20,10 +21,10 @@ class Commentaries extends Component
     protected $rules = [
         'content' => 'required|string|max:255',
     ];
-    public function mount(Commentary $comment)
+    public function mount(Commentary $comment, $ticketID = null)
     {
+        $this->ticket = $ticketId ?? request()->route('ticket');
         $this->commentaries = Commentary::where('ticket_id',request()->route('ticket'))->get();
-        $this->ticket = request()->route('ticket');
         $this->comment = $comment;
     }
     public function confirmCommentAdd()
@@ -37,7 +38,7 @@ class Commentaries extends Component
             $comment = new Commentary;
             $comment->content = $this->content;
             $comment->user_id = auth()->user()->id;
-            $comment->ticket_id = $this->ticket;
+            $comment->ticket_id = $this->ticket_id;
 
             $comment->save();
 

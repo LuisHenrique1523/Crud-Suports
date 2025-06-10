@@ -18,7 +18,7 @@ class TicketTest extends TestCase
 
     $categoryId = \DB::table('categories')->insertGetId([
         'name' => 'Suporte Técnico',
-        'color' => '#FF0000',
+        'color' => '#F00000',
     ]);
     $operatorRole = Role::firstOrCreate([
         'name' => 'operator',
@@ -29,7 +29,7 @@ class TicketTest extends TestCase
     $user->assignRole($operatorRole);
     $this->actingAs($user);
 
-    Livewire::test('HomePage')
+    $ticket = Livewire::test('HomePage')
         ->set('subject', 'Erro ao logar')
         ->set('description', 'Aparece erro 403 ao tentar logar')
         ->set('priority', '0')

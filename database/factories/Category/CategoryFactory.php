@@ -16,9 +16,10 @@ class CategoryFactory extends Factory
      */
     public function definition(): array
     {
+        $colors = ['#7E442E','#FF0000','#2A9D8F','#3A5F8C','#FFB703'];
         return [
             'name' => 'categoria',
-            'color' => '#7E442E',
+            'color' => $this->faker->randomElement($colors),
         ];
     }
 }
