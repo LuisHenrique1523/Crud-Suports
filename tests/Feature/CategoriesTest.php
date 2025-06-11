@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 class CategoriesTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase; 
     public function test_modal_create_category()
     {
         $category = Livewire::test(Categories::class)

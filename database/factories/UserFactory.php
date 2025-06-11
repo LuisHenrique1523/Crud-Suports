@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
+use Spatie\Permission\Models\Role;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -37,6 +38,22 @@ class UserFactory extends Factory
             'profile_photo_path' => null,
             'current_team_id' => null,
         ];
+    }
+    public function configure()
+    {
+        return $this->afterCreating(function (User $user){
+            $permissions = [
+                'create-ticket',
+                'edit-ticket',
+                'delete-ticket',
+            ];
+            
+        $userRole = Role::firstOrCreate(['name' => 'user', 'guard_name' => 'web']);
+
+        $userRole->syncPermissions($permissions);
+
+        $user->assignRole($userRole);
+        });
     }
 
     /**

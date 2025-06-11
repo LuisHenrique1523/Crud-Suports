@@ -12,7 +12,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
 use Tests\TestCase;
 
-class CommentaryTest extends TestCase
+class CommentariesTest extends TestCase
 {
     use RefreshDatabase;
     public function test_modal_create_commentary()
@@ -30,7 +30,7 @@ class CommentaryTest extends TestCase
 
         $ticket = Ticket::factory()->create();
 
-        Livewire::test(Commentaries::class,['ticketId' => $ticket->id])
+        Livewire::test(Commentaries::class,['ticketID' => $ticket->id])
             ->set('user_id', $user->id)
             ->set('ticket_id', $ticket->id)
             ->set('content', 'Cubo')
@@ -82,7 +82,7 @@ class CommentaryTest extends TestCase
 
         $ticket = Ticket::factory()->create();
 
-        Livewire::test(Commentaries::class,['ticketId' => $ticket->id])
+        $commentaries = Livewire::test(Commentaries::class,['ticketId' => $ticket->id])
             ->set('user_id', $user->id)
             ->set('ticket_id', $ticket->id)
             ->set('content', 'Cubo')
@@ -96,8 +96,7 @@ class CommentaryTest extends TestCase
 
         $commentary = Commentary::where('content', 'Cubo')->first();
 
-        Livewire::test(Commentaries::class)
-                ->call('confirmCommentDeletion', $commentary->id);
+        $commentaries->call('confirmCommentDeletion', $commentary->id);
 
         $this->assertDatabaseMissing('commentaries', [
         'id' => $commentary->id,

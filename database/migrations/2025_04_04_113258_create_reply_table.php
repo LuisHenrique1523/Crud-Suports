@@ -26,9 +26,10 @@ return new class extends Migration
                 ->on('tickets')
                 ->cascadeOnDelete();
 
-            $table->foreignId('ticket_user_id')
-                ->references('user_id')
-                ->on('tickets')
+
+            $table->foreignId('ticket_creator')
+                ->references('id')
+                ->on('users')
                 ->cascadeOnDelete();
 
             });

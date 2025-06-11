@@ -23,7 +23,7 @@ class Ticket extends Model
     ];
     public function replies()
     {
-        return $this->hasMany(Reply::class,'ticket_id', 'id');
+        return $this->hasMany(Reply::class);
     }
     public function commentaries()
     {

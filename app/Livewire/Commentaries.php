@@ -9,11 +9,10 @@ use Livewire\Component;
 
 class Commentaries extends Component
 {
-    public $ticket = [];
+    public $ticket_id = [];
     public $id;
     public $content;
     public $user_id;
-    public $ticket_id;
     public Commentary $comment;
     public $commentaries;
     public $confirmingCommentAdd = false;
@@ -23,7 +22,7 @@ class Commentaries extends Component
     ];
     public function mount(Commentary $comment, $ticketID = null)
     {
-        $this->ticket = $ticketId ?? request()->route('ticket');
+        $this->ticket_id = $ticketId ?? request()->route('ticket');
         $this->commentaries = Commentary::where('ticket_id',request()->route('ticket'))->get();
         $this->comment = $comment;
     }
@@ -63,7 +62,7 @@ class Commentaries extends Component
 
                 $comment->content = $this->content;
                 $comment->user_id = $this->user_id;
-                $comment->ticket_id = $this->ticket;
+                $comment->ticket_id = $this->ticket_id;
                 $comment->save();
 
                 return redirect()->route('commentaries',[$comment->ticket_id]);

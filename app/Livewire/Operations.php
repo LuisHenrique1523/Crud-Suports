@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class Operations extends Component
 {
-    public $ticket = [];
+    public $ticket_id = [];
     public $id;
     public $description;
     public $user_id;
@@ -20,10 +20,10 @@ class Operations extends Component
     protected $rules = [
         'description' => 'required|string|max:255',
     ];
-    public function mount(Operation $operation, Ticket $ticket)
+    public function mount(Operation $operation, $ticketID = null)
     {
+        $this->ticket_id = $ticketId ?? request()->route('ticket');
         $this->operations = Operation::where('ticket_id', request()->route('ticket'))->get();
-        $this->ticket = request()->route('ticket');
         $this->operation = $operation;
     }
     public function confirmOperationAdd()
@@ -36,7 +36,7 @@ class Operations extends Component
         $this->validate();
             $operation = new Operation;
             $operation->user_id = auth()->user()->id;
-            $operation->ticket_id = $this->ticket;
+            $operation->ticket_id = $this->ticket_id;
             $operation->description = $this->description;
 
             $operation->save();
@@ -62,7 +62,7 @@ class Operations extends Component
 
                 $operation->description = $this->description;
                 $operation->user_id = $this->user_id;
-                $operation->ticket_id = $this->ticket;
+                $operation->ticket_id = $this->ticket_id;
                 $operation->save();
 
                 return redirect()->route('operations',[$operation->ticket_id]);

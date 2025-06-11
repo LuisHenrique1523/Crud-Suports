@@ -23,7 +23,7 @@
                     @endif
                 </div>
                     <div style="table-layout:auto; width:333%; margin-bottom:0px;">
-                        <table style="margin-bottom:0px; width:10%;" class="table">
+                        <table style="margin-bottom:0px; width:14%;" class="table">
                             <thead> 
                                 <tr>
                                     <th scope="col">#</th>

@@ -15,12 +15,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        // Ticket::factory(20)->create();
-
-        // Category::factory(2)->create();
-
         $this->call(RolePermissionSeeder::class);
+
+        Category::factory(2)->create();
+
+        Ticket::factory(10)->create();
+
+        User::factory(10)->create();
     }
 }

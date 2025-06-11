@@ -30,6 +30,7 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Usuário</th>
+                                <th scope="col">Criador do Ticket</th>
                                 <th scope="col">Ticket</th>
                                 <th scope="col">Resposta</th>
                                 @can('operations')
@@ -43,6 +44,7 @@
                                    <tr>
                                         <td>{{$reply->id}}</td>
                                         <td>{{$reply->user->name}}</td>
+                                        <td>{{$reply->creator->name}}</td>
                                         <td>{{$reply->ticket->subject}}</td>
                                         <td>{{$reply->reply}}</td>
                                         @can('edit',$reply)
