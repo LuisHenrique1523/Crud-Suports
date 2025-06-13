@@ -8,8 +8,9 @@ use App\Models\Commentary\Commentary;
 use App\Models\Ticket\Ticket;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
 class CommentariesTest extends TestCase
@@ -75,7 +76,20 @@ class CommentariesTest extends TestCase
     }
     public function test_delete_commentary()
     {
+        $permisison = Permission::firstOrCreate([
+            'name' => 'delete',
+            'guard_name' => 'web',
+        ]);
+
+        $userRole = Role::firstOrCreate([
+            'name' => 'user',
+            'guard_name' => 'web',
+        ]);
+
+        $userRole->syncPermissions([$permisison]);
+
         $user = User::factory()->create();
+        $user->assignRole($userRole);
         Livewire::actingAs($user);
 
         $category = Category::factory()->create();
@@ -95,11 +109,9 @@ class CommentariesTest extends TestCase
             ]);
 
         $commentary = Commentary::where('content', 'Cubo')->first();
-
         $commentaries->call('confirmCommentDeletion', $commentary->id);
 
-        $this->assertDatabaseMissing('commentaries', [
-        'id' => $commentary->id,
-        ]);
+        $this->assertDatabaseCount('commentaries','0');
+
     }
 }

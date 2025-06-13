@@ -10,6 +10,8 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
 class RepliesTest extends TestCase
@@ -79,7 +81,20 @@ class RepliesTest extends TestCase
     }
     public function test_delete_reply()
     {
+        $permisison = Permission::firstOrCreate([
+            'name' => 'delete',
+            'guard_name' => 'web',
+        ]);
+
+        $userRole = Role::firstOrCreate([
+            'name' => 'user',
+            'guard_name' => 'web',
+        ]);
+
+        $userRole->syncPermissions([$permisison]);
+
         $user = User::factory()->create();
+        $user->assignRole($userRole);
         Livewire::actingAs($user);
 
         $category = Category::factory()->create();
@@ -101,11 +116,8 @@ class RepliesTest extends TestCase
             ]);
 
             $reply = Reply::where('reply', 'Resposta')->first();
-
             $replies->call('confirmReplyDeletion', $reply->id);
 
-        $this->assertDatabaseMissing('replies_ticket', [
-        'id' => $reply->id,
-        ]);
+            $this->assertDatabaseCount('replies_ticket','0');
     }
 }

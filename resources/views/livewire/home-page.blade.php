@@ -97,7 +97,6 @@
                                             <td colspan="9">Nenhum Ticket Registrado</td>
                                         </tr>
                                     @endif
-                                    
                                 @endrole
                                 @can('show-all')
                                     @if ($adm_tickets->count() > 0)
@@ -297,7 +296,7 @@
 
                 <x-slot name="footer">
                     @can('finish-ticket')
-                        <x-secondary-button wire:click="status( {{$showticket->id}})">
+                        <x-secondary-button wire:click="toggleStatus({{$showticket->id}})" wire:loading.attr="disabled">
                             {{ $showticket->status ? 'Finalizar' : 'Abrir' }}
                         </x-secondary-button>
                     @endcan
@@ -315,6 +314,5 @@
                 
             </x-dialog-modal>
         @endisset
-
     </div>
 </div>

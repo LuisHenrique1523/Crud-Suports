@@ -15,6 +15,7 @@ class HomePage extends Component
     public $subject;
     public $description;
     public $categories;
+    public $user_id;
     public $category_id;
     public $priority;
     public $status;
@@ -33,7 +34,7 @@ class HomePage extends Component
         $this->priority = Priority::cases();
         $this->categories = Category::all();
     }
-    public function status($id)
+    public function toggleStatus($id)
     {
         $ticket = Ticket::find($id);
 
@@ -106,7 +107,7 @@ class HomePage extends Component
     }
     public function confirmTicketDeletion(Ticket $ticket)
     {
-        try{
+         try{
             if ($this->authorize('delete-ticket',$ticket))
             {
                 try{
@@ -116,10 +117,8 @@ class HomePage extends Component
                 }catch(\Exception $e){
                     session()->flash('error', 'Não é possível deletar um ticket em uso!');
                 }
-
-                $this->dispatch('refresh');
-                return redirect()->route('home');
             }
+                return redirect()->route('home');
         }catch(\Exception $e){
             session()->flash('error', 'Permissão necessária para realizar essa ação!');
         }

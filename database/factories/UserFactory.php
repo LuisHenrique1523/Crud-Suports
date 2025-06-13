@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 /**
@@ -39,23 +40,28 @@ class UserFactory extends Factory
             'current_team_id' => null,
         ];
     }
-    public function configure()
+    public function withRole(string $userRole)
     {
-        return $this->afterCreating(function (User $user){
-            $permissions = [
-                'create-ticket',
-                'edit-ticket',
-                'delete-ticket',
-            ];
-            
-        $userRole = Role::firstOrCreate(['name' => 'user', 'guard_name' => 'web']);
-
-        $userRole->syncPermissions($permissions);
-
-        $user->assignRole($userRole);
+        return $this->afterCreating(function (User $user) use ($userRole) {
+            $role = Role::firstOrCreate(['name' => $userRole]);
+            $user->assignRole($role);
         });
     }
+    public function withPermissions(array $permission)
+    {
+        $permissions = [
+            'create-ticket',
+            'edit-ticket',
+            'delete-ticket',
+        ];
 
+        return $this->afterCreating(function (User $user) use ($permissions) {
+            foreach ($permissions as $permission) {
+                $permission = Permission::firstOrCreate(['name' => $permission]);
+                $user->givePermissionTo($permission);
+            }
+        });
+    }
     /**
      * Indicate that the model's email address should be unverified.
      */

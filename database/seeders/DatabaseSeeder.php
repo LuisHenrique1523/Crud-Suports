@@ -21,6 +21,9 @@ class DatabaseSeeder extends Seeder
 
         Ticket::factory(10)->create();
 
-        User::factory(10)->create();
+        User::factory(10)
+        ->withRole('user')
+        ->withPermissions(['create-ticket','edit-ticket','delete-ticket',])
+        ->create();
     }
 }

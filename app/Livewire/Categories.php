@@ -4,12 +4,13 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Category\Category;
+use Livewire\WithPagination;
 
 class Categories extends Component 
 {
+    use WithPagination;
     public $id;
     public Category $category;
-    public $categories;
     public $name;
     public $color;
     public $confirmingCategoryAdd = false;
@@ -20,7 +21,6 @@ class Categories extends Component
     ];
     public function mount(Category $category)
     {
-        $this->categories = Category::all();
         $this->category = $category;
     }
     public function confirmCategoryAdd()
@@ -90,8 +90,10 @@ class Categories extends Component
         return redirect('/categories');
     }
     
-    public function render()
+    public function render(Category $category)
     {
-        return view('livewire.categories');
+        return view('livewire.categories',[
+            'categories' => Category::paginate(10),
+        ]);
     }
 }

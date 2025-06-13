@@ -9,6 +9,8 @@ use App\Models\Ticket\Ticket;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
 class OperationsTest extends TestCase
@@ -74,7 +76,20 @@ class OperationsTest extends TestCase
     }
     public function test_delete_operation()
     {
+        $permisison = Permission::firstOrCreate([
+            'name' => 'delete',
+            'guard_name' => 'web',
+        ]);
+
+        $userRole = Role::firstOrCreate([
+            'name' => 'user',
+            'guard_name' => 'web',
+        ]);
+
+        $userRole->syncPermissions([$permisison]);
+        
         $user = User::factory()->create();
+        $user->assignRole($userRole);
         Livewire::actingAs($user);
 
         $category = Category::factory()->create();
@@ -96,9 +111,7 @@ class OperationsTest extends TestCase
         $operation = Operation::where('description', 'Caixa')->first();
 
         $operations->call('confirmOperationDeletion', $operation->id);
+        $this->assertDatabaseCount('operations','0');
 
-        $this->assertDatabaseMissing('operations', [
-        'id' => $operation->id,
-        ]);
     }
 }

@@ -8,7 +8,6 @@ use Livewire\Component;
 
 class Users extends Component
 {
-    public $users;
     public $id;
     public $name;
     public $email;
@@ -24,7 +23,6 @@ class Users extends Component
     ];
     public function mount()
     {
-        $this->users = User::all();
     }
     public function confirmUserAdd()
     {
@@ -85,8 +83,11 @@ class Users extends Component
             $this->dispatch('refresh');
             return redirect()->route('users');
     }
-    public function render()
+    public function render(User $user)
     {
-        return view('livewire.users');
+        $users = $user->paginate(10);
+        return view('livewire.users',[
+            'users' => $users,
+        ]);
     }
 }

@@ -44,7 +44,6 @@ class CategoriesTest extends TestCase
             'name' => 'Categoria editada',
             'color' => 'FF0000',
         ];
-
         $this->assertSame($edited, $category);
     }
     public function test_delete_category()
@@ -52,7 +51,7 @@ class CategoriesTest extends TestCase
         $user = User::factory()->create();
         Livewire::actingAs($user);
 
-        Livewire::test(Categories::class)
+        $categories = Livewire::test(Categories::class)
                 ->set('name', 'Categoria Teste')
                 ->set('color', '#7E442E')
                 ->call('submit');
@@ -63,12 +62,27 @@ class CategoriesTest extends TestCase
             ]);
         
         $category = Category::where('name', 'Categoria Teste')->first();
+        $categories->call('confirmCategoryDeletion', $category->id);
+        
+        $this->assertDatabaseCount('categories','0');
+    }
+    public function test_displays_paginated_categories()
+    {
+        $category = Category::factory()->count(15)->create();
 
-         Livewire::test(Categories::class)
-                ->call('confirmCategoryDeletion', $category->id);
+        Livewire::test(Categories::class)
+            ->assertViewHas('categories', function($categories){
+                return $categories->count() === 10;
+            });
+    }
+    public function test_displays_second_page_correctly()
+    {
+        $category = Category::factory()->count(15)->create();
 
-        $this->assertDatabaseMissing('categories', [
-        'id' => $category->id,
-        ]);
+        Livewire::test(Categories::class)
+            ->call('gotoPage', 2) 
+            ->assertViewHas('categories', function($categories){
+                return $categories->count() === 5;
+            });
     }
 }
