@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Ticket\Ticket;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
@@ -43,11 +44,23 @@ class Users extends Component
     }
     public function confirmUserEdit(User $user)
     {
-        $this->id = $user->id;
-        $this->name = $user->name;
-        $this->email = $user->email;
+        try {
+            $userInUse = \DB::table('tickets')
+                ->where('user_id', $user->id)
+                ->exists();
 
-        $this->confirmingUserEdit = true;
+            if ($userInUse) {
+                session()->flash('error', 'Não é possível editar um usuário em uso!');
+            } else {
+                    $this->id = $user->id;
+                    $this->name = $user->name;
+                    $this->email = $user->email;
+
+                    $this->confirmingUserEdit = true;
+                }
+        }catch (\Exception $e) {
+            session()->flash('error', 'Erro!');
+        }
     }
     public function UserEdit()
     {

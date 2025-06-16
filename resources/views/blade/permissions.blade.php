@@ -5,6 +5,6 @@
         </h2>
     </x-slot>                    
 
-    <livewire:permisisons />
+    <livewire:permissisons />
 
 </x-app-layout>

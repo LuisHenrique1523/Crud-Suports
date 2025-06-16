@@ -38,10 +38,22 @@ class Roles extends Component
     }
     public function confirmRoleEdit(Role $role)
     {
-        $this->id = $role->id;
-        $this->name = $role->name;
+        try {
+            $roleInUse = \DB::table('model_has_roles')
+                ->where('role_id', $role->id)
+                ->exists();
 
-        $this->confirmingRoleEdit = true;
+            if ($roleInUse) {
+                session()->flash('error', 'Não é possível editar uma função em uso!');
+            } else {
+                    $this->id = $role->id;
+                    $this->name = $role->name;
+
+                    $this->confirmingRoleEdit = true;
+            }
+        }catch (\Exception $e) {
+            session()->flash('error', 'Erro!');
+        }
     }
     public function roleEdit(Role $role)
     {

@@ -5,7 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use Spatie\Permission\Models\Permission;
 
-class Permisisons extends Component
+class Permissisons extends Component
 {
     public $permissions;
     public $id;
@@ -38,10 +38,22 @@ class Permisisons extends Component
     }
     public function confirmPermissionEdit(Permission $permission)
     {
-        $this->id = $permission->id;
-        $this->name = $permission->name;
+        try {
+            $permissionInUse = \DB::table('role_has_permissions')
+                ->where('permission_id', $permission->id)
+                ->exists();
 
-        $this->confirmingPermissionEdit = true;
+            if ($permissionInUse) {
+                session()->flash('error', 'Não é possível editar uma permissão em uso!');
+            } else {
+                    $this->id = $permission->id;
+                    $this->name = $permission->name;
+
+                    $this->confirmingPermissionEdit = true;
+            }
+        }catch (\Exception $e) {
+            session()->flash('error', 'Erro!');
+        }
     }
     public function permissionEdit(Permission $permission)
     {
