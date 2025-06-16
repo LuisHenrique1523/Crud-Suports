@@ -13,6 +13,7 @@ class Users extends Component
     public $name;
     public $email;
     public $password;
+    public $user;
     public $password_confirmation;
 
     public $confirmingUserAdd = false;
@@ -24,6 +25,7 @@ class Users extends Component
     ];
     public function mount()
     {
+        $this->user = User::all();
     }
     public function confirmUserAdd()
     {

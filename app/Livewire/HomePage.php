@@ -20,6 +20,8 @@ class HomePage extends Component
     public $priority;
     public $status;
     public Ticket $ticket;
+    public $search = '';
+    public $tickets;
     public $confirmingTicketAdd = false;
     public $confirmingTicketEdit = false;
     public $confirmingTicketShow = false;
@@ -31,6 +33,7 @@ class HomePage extends Component
     ];
     public function mount()
     {
+        $this->tickets = Ticket::all();
         $this->priority = Priority::cases();
         $this->categories = Category::all();
     }
@@ -127,7 +130,7 @@ class HomePage extends Component
     public function render(Ticket $tickets)
     {
         $supports = auth()->user()->tickets()->orderBy('priority')->paginate(5);
-        $adm_tickets = $tickets->orderBy('priority')->paginate(10);
+        $adm_tickets = Ticket::search('subject', $this->search)->orderBy('priority')->paginate(10);
         $showtickets = $this->ticketdescription;
 
         return view('livewire.home-page',[

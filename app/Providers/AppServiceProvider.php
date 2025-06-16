@@ -6,6 +6,7 @@ use App\Models\Reply;
 use App\Models\User;
 use App\Policies\ReplyPolicy;
 use App\Policies\CommentPolicy;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,6 +27,10 @@ class AppServiceProvider extends ServiceProvider
     {
         Gate::before(function ($user, $ability) {
             return $user->hasRole('superadmin') ? true : null;
+        });
+
+        Builder::macro('search',function ($field, $string) {
+            return $string ? $this->where($field, 'like', '%'.$string.'%') : $this;            
         });
     }
 }

@@ -3,11 +3,13 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <h2 class="font-semibold fs-1 text-xl text-gray-800 leading-tight flex justify-between">
-                    {{ __('Suportes') }}
-                    <div class="mr-2">
+                    {{ __('Suportes') }} #{{$tickets->count()}}
+                    <div class="mr2">
+                        <input wire:model.live="search" placeholder="pesquisar"
+                                class="border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                         @can('create-ticket')
                             <x-button wire:click="confirmTicketAdd" style="background: blue">
-                                Novo Ticket
+                                Novo Ticket 
                             </x-button>
                         @endcan
                     </div>

@@ -3,7 +3,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <h2 class="font-semibold fs-1 text-xl text-gray-800 leading-tight flex justify-between">
-                    {{ __('Permissões') }}
+                    {{ __('Permissões') }} #{{$permissions->count()}}
                     <div class="mr-2">
                         <x-button wire:click="confirmPermissionAdd" style="background: blue">
                             Nova Permissão
