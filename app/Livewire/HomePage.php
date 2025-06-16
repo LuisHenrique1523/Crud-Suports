@@ -27,7 +27,7 @@ class HomePage extends Component
         'subject' => 'required|string|max:255',
         'description' => 'required|string|max:255',
         'category_id' => 'required',
-        'priority' => 'required|string',
+        'priority' => 'required',
     ];
     public function mount()
     {
